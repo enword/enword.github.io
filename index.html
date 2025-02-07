@@ -10,6 +10,13 @@
   <link rel="icon" href="./favicon.png" type="image/x-icon">
   <title>enWord</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap');
+
+    @font-face {
+      font-family: "JostLocal";
+      src: url("./Jost-Bold.ttf");
+    }
+
     :root {
       --white-color: #ffffff;
       --black-color: #000000;
@@ -20,9 +27,11 @@
       --gradient-color: linear-gradient(128.87deg, #9780e5 14.05%, #53ceda 89.3%);
     }
 
-    @font-face {
-      font-family: "Jost";
-      src: url("./Jost-Bold.ttf");
+    .jost-enword {
+      font-family: "Jost", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 700;
+      font-style: normal;
     }
 
     * {
@@ -30,10 +39,10 @@
       margin: 0;
       color: white;
       font-size: 15px;
-      font-family: "Jost", sans-serif;
       text-align: center;
       line-height: 1.2;
       border-radius: 8px;
+      font-family: "Jost", "JostLocal", sans-serif;
     }
 
     *:focus {
