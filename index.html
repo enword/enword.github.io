@@ -221,18 +221,18 @@
     }
 
     #achievement40Words {
+      display: none;
       position: absolute;
       left: -10px;
       top: 57px;
       padding: 10px;
       background: #007905;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       font-size: 2.2rem;
-      /* letter-spacing: -4px; */
       transform: rotate(20deg);
       text-shadow: 2px 2px 2px #0000005c;
+      justify-content: center;
+      align-items: center;
+      transition: 1s;
     }
   </style>
 </head>
@@ -678,10 +678,6 @@
     const achievement40Words = document.getElementById("achievement40Words");
     const buttonShowTranslation = document.getElementById("buttonShowTranslation");
 
-    document.addEventListener("DOMContentLoaded", function () {
-      achievement40Words.style.display = "none";
-    });
-
     let arrayMini = [];
     let indexMini = 0;
     let indexOfCurrentWord = 0;
@@ -895,10 +891,14 @@
       me.style.display = "";
     }
 
+    function show40() {
+      achievement40Words.style.display = "flex";
+    }
+
     // every 40 words achievement is shown
     function achieve40Words(currentMode) {
       if (indexOfCurrentWord === 40) {
-        showThis(achievement40Words);
+        show40();
         achievement40Words.style.background = "#007905";
         achievement40Words.innerHTML = "";
         achievement40Words.innerHTML = indexOfCurrentWord;
@@ -913,7 +913,7 @@
         achievement40Words.innerHTML = "";
         achievement40Words.innerHTML = indexOfCurrentWord;
       }
-      if (indexOfCurrentWord < 39) {
+      if (indexOfCurrentWord < 40) {
         hideThis(achievement40Words);
       }
     }
