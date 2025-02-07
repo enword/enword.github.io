@@ -678,6 +678,10 @@
     const achievement40Words = document.getElementById("achievement40Words");
     const buttonShowTranslation = document.getElementById("buttonShowTranslation");
 
+    document.addEventListener("DOMContentLoaded", function () {
+      achievement40Words.style.display = "none";
+    });
+
     let arrayMini = [];
     let indexMini = 0;
     let indexOfCurrentWord = 0;
