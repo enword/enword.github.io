@@ -889,21 +889,15 @@
 
     // every 40 words achievement is shown
     function achieve40Words(currentMode) {
-      if (indexOfCurrentWord === 40) {
-        show40();
-        achievement40Words.style.background = "#007905";
-        achievement40Words.innerHTML = "";
-        achievement40Words.innerHTML = indexOfCurrentWord;
-      }
-      if (indexOfCurrentWord === 80) {
-        achievement40Words.style.background = "#007279";
-        achievement40Words.innerHTML = "";
-        achievement40Words.innerHTML = indexOfCurrentWord;
-      }
-      if (indexOfCurrentWord === 120) {
-        achievement40Words.style.background = "#6d0079";
-        achievement40Words.innerHTML = "";
-        achievement40Words.innerHTML = indexOfCurrentWord;
+      const wordsCount = [40, 80, 120];
+      const bgColors = ["#007905", "#007279", "#6d0079"];
+
+      for (let i = 0; i < wordsCount.length; i++) {
+        if (indexOfCurrentWord === wordsCount[i]) {
+          show40();
+          achievement40Words.style.background = bgColors[i];
+          achievement40Words.innerHTML = indexOfCurrentWord;
+        }
       }
       if (indexOfCurrentWord < 40) {
         hideThis(achievement40Words);
