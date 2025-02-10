@@ -892,13 +892,13 @@
       const wordsCount = [40, 80, 120];
       const bgColors = ["#007905", "#007279", "#ff5400"];
 
-      for (let i = 0; i < wordsCount.length; i++) {
+      wordsCount.forEach((val, i) => {
         if (indexOfCurrentWord === wordsCount[i]) {
           show40();
           achievement40Words.style.background = bgColors[i];
           achievement40Words.innerHTML = indexOfCurrentWord;
         }
-      }
+      });
       if (indexOfCurrentWord < 40) {
         hideThis(achievement40Words);
       }
