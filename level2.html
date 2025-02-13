@@ -10,6 +10,12 @@
     <link rel="icon" href="./favicon.png" type="image/x-icon">
     <title>enWord</title>
     <style>
+        /* @font-face {
+            font-family: "Jost";
+            src: url("./font.ttf") format("truetype");
+            font-weight: 700;
+        } */
+
         :root {
             --title-color: #b6a2f9;
             --bg-color: linear-gradient(180deg, rgba(41, 29, 39, 1) 0%, rgba(32, 31, 36, 1) 100%);
@@ -25,7 +31,7 @@
             line-height: 1.2;
             border-radius: 8px;
             font-family: sans-serif;
-            font-weight: 700;
+            font-weight: 900;
         }
 
         *:focus {
@@ -525,7 +531,7 @@
             shuffle(arrayPhrases);
             shuffle(arrayVerbWords);
         }
-        shuffleAllArrays(); // Shuffle arrays OFTEN, it is important! Don't change.
+        shuffleAllArrays(); // Shuffle arrays OFTEN, it is important! Don"t change.
 
         window.speechSynthesis.getVoices(); // Preload TTS voices
 
