@@ -77,7 +77,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: row;
-      gap: 14px;
+      gap: 10px;
     }
 
     #navTop div {
@@ -719,6 +719,9 @@
     // Text to speach
     buttonShowTranslation.addEventListener("click", function () {
       ShowTranslation(currentMode);
+    });
+
+    div2.addEventListener("click", function () {
       if (currentMode !== 2) {
         textToSpeach(currentMode);
       }
