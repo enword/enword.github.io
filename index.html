@@ -29,7 +29,7 @@
       font-size: 15px;
       text-align: center;
       line-height: 1.2;
-      border-radius: 8px;
+      border-radius: 7%;
       font-family: sans-serif;
       font-weight: 900;
     }
@@ -77,7 +77,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: row;
-      gap: 10px;
+      gap: 2svh;
     }
 
     #navTop div {
@@ -87,7 +87,7 @@
       align-items: center;
       cursor: pointer;
       background: #372237;
-      font-size: 3vh;
+      font-size: 3svh;
       aspect-ratio: 1/1;
     }
 
@@ -104,7 +104,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: row;
-      gap: 14px;
+      gap: 2svh;
     }
 
     #navBottom div {
@@ -113,7 +113,7 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      font-size: 4vh;
+      font-size: 4svh;
       aspect-ratio: 1/1;
     }
 
@@ -177,16 +177,16 @@
     #div1 span,
     #div2 span,
     #div3 span {
-      font-size: 7vh;
+      font-size: 7svh;
       overflow-wrap: anywhere;
-    }
-
-    #div1 span {
       width: 100%;
-      min-height: 110px;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    #div1 span {
       background: var(--gradient-color);
       background-clip: text;
       -webkit-background-clip: text;
@@ -194,25 +194,15 @@
     }
 
     #div2 span {
-      width: 100%;
-      min-height: 110px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       cursor: pointer;
     }
 
     #div3 span {
-      width: 100%;
-      min-height: 110px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       color: #ffffff80;
     }
 
     .small-font {
-      font-size: 5vh !important;
+      font-size: 5svh !important;
     }
 
     #achievement40Words {
@@ -222,7 +212,7 @@
       top: 8%;
       padding: 10px;
       background: #007905;
-      font-size: 4vh;
+      font-size: 4svh;
       transform: rotate(20deg);
       text-shadow: 2px 2px 2px #0000005c;
       justify-content: center;
@@ -442,7 +432,7 @@
       ["remnant", "", "остаток"],
       ["resemble", "", "походить"],
       ["ruddy", "", "румяный"],
-      ["rueful", "", "печальный"],
+      ["rueful", "руфл", "печальный"],
       ["scarcely", "", "едва"],
       ["scrutiny", "скрУтэни", "внимательное изучение"],
       ["seize", "", "схватить"],
