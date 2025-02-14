@@ -77,7 +77,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: row;
-      gap: 14px;
+      gap: 10px;
     }
 
     #navTop div {
@@ -212,7 +212,7 @@
     }
 
     .small-font {
-      font-size: 2.1rem !important;
+      font-size: 5vh !important;
     }
 
     #achievement40Words {
@@ -241,6 +241,7 @@
       <div id="buttonMode3">3</div>
       <div id="buttonMode4">4</div>
       <div id="buttonMode5">5</div>
+      <div id="buttonMode6">7</div>
       <!-- <div id="vocabulary">w</div> -->
     </div>
     <div id="buttonShowTranslation">
@@ -390,6 +391,95 @@
       ["expensive", "икспЭнсив", "дорогой"],
       ["flat", "флэт", "плоский"],
       ["half", "хаф", "половина"],
+    ];
+
+    const arrayLvl2Words = [
+      ["abruptly", "", "внезапно"],
+      ["adverse", "", "неблагоприятный"],
+      ["apparently", "", "очевидно"],
+      ["apprehension", "", "опасение"],
+      ["astonishing", "", "удивительный"],
+      ["bargain", "бАргэн", "сделка"],
+      ["bowels", "бАуэлс", "недра"],
+      ["brittle", "", "хрупкий"],
+      ["cease", "", "прекращать"],
+      ["claim", "", "утверждать"],
+      ["conscience", "кОншэнс", "совесть"],
+      ["contempt", "", "презрение"],
+      ["conviction", "", "убеждение"],
+      ["culprit", "кАлприт", "виновник"],
+      ["deft", "", "ловкий"],
+      ["dignity", "", "достоинство"],
+      ["dour", "дАуэр", "суровый"],
+      ["elaborate", "", "подробный"],
+      ["embarrass", "", "смущать"],
+      ["encounter", "", "встречать"],
+      ["fascinate", "", "очаровывать"],
+      ["finicky", "", "привередливый"],
+      ["frantic", "", "безумный"],
+      ["grim", "", "мрачный"],
+      ["grin", "", "усмешка"],
+      ["grope", "", "шарить"],
+      ["guile", "гайл", "хитрость"],
+      ["hence", "", "следовательно"],
+      ["hiss", "", "шипение"],
+      ["hitherto", "хизэртУ", "до сих пор"],
+      ["huddle", "", "толпиться"],
+      ["husky", "", "хриплый"],
+      ["intricate", "", "запутанный"],
+      ["leisure", "лИжэр", "досуг"],
+      ["morose", "мэрОус", "угрюмый"],
+      ["mutter", "мАтэр", "бормотать"],
+      ["nasty", "", "мерзкий"],
+      ["neat", "", "аккуратный"],
+      ["numb", "нам", "онемевший"],
+      ["orchard", "Орчэрд", "фруктовый сад"],
+      ["plausible", "", "правдоподобный"],
+      ["profound", "", "глубокий"],
+      ["quarrel", "", "ссора"],
+      ["refute", "", "опровергать"],
+      ["reluctant", "", "неохотный"],
+      ["remnant", "", "остаток"],
+      ["resemble", "", "походить"],
+      ["ruddy", "", "румяный"],
+      ["rueful", "", "печальный"],
+      ["scarcely", "", "едва"],
+      ["scrutiny", "скрУтэни", "внимательное изучение"],
+      ["seize", "", "схватить"],
+      ["seldom", "", "редко"],
+      ["shudder", "", "вздрагивать"],
+      ["sinister", "", "зловещий"],
+      ["sombre", "", "мрачный"],
+      ["startled", "", "испуганный"],
+      ["tamper", "", "вмешиваться"],
+      ["temper", "", "характер"],
+      ["tempt", "", "искушать"],
+      ["temptation", "", "искушение"],
+      ["trite", "трайт", "банальный"],
+      ["unbearable", "анбЭрэбл", "невыносимый"],
+      ["vague", "", "расплывчатый"],
+      ["virtually", "", "фактически"],
+      ["voluntary", "вАлэнтэри", "добровольный"],
+      ["pledge", "", "обязуется"],
+      ["tempest", "", "буря"],
+      ["downplay", "", "преуменьшать"],
+      ["robust", "робАст", "надежный"],
+      ["vicious", "", "злобный"],
+      ["haunted", "", "с привидениями"],
+      ["reckoning", "рЭкэнинг", "расплата"],
+      ["deliberate", "", "умышленный"],
+      ["sever", "сЭвэр", "разорвать"],
+      ["severed", "сЭвэрд", "отделенный"],
+      ["severe", "", "суровый"],
+      ["akin to", "экИн", "наподобие"],
+      ["prejudice", "прЭджэдис", "предвзятость"],
+      ["argue", "Аргью", "утверждать"],
+      ["stand out", "", "выделяться"],
+      ["counterparts", "", "коллеги"],
+      ["complementary", "", "дополняющий"],
+      ["amid", "эмИд", "на фоне"],
+      ["embed", "имбЭд", "встроить"],
+      ["peculiar", "пикьЮлиар", "своеобразный"],
     ];
 
     const arrayVerbWords = [
@@ -648,6 +738,7 @@
       shuffle(arrayLongWords);
       shuffle(arrayPhrases);
       shuffle(arrayVerbWords);
+      shuffle(arrayLvl2Words);
     }
     shuffleAllArrays(); // Shuffle arrays OFTEN, it is important! Don"t change.
 
@@ -670,6 +761,7 @@
     const buttonMode3 = document.getElementById("buttonMode3");
     const buttonMode4 = document.getElementById("buttonMode4");
     const buttonMode5 = document.getElementById("buttonMode5");
+    const buttonMode6 = document.getElementById("buttonMode6");
     const buttonAddWord = document.getElementById("buttonAddWord");
     const buttonNextWord = document.getElementById("buttonNextWord");
     const buttonCountWord = document.getElementById("buttonCountWord");
@@ -725,6 +817,15 @@
         showBtn: [],
         hideBtn: [buttonAddWord, buttonCountWord],
         array: arrayVerbWords,
+      },
+      6: {
+        wordOrder: [2, 0, 1],
+        showDiv: [div2, div3],
+        hideDiv: [div1],
+        translationDiv: [div1],
+        showBtn: [buttonAddWord, buttonCountWord],
+        hideBtn: [],
+        array: arrayLvl2Words,
       },
     };
 
@@ -875,6 +976,7 @@
       buttonMode3.style.background = "";
       buttonMode4.style.background = "";
       buttonMode5.style.background = "";
+      buttonMode6.style.background = "";
       indexMini = 0;
       arrayMini.length = 0;
       buttonNextWord.innerHTML = currentArray.length;
