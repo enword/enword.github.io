@@ -479,6 +479,9 @@
       ["humble", "хАмбэл", "смиренный"],
       ["hilarious", "хилЭриэс", "уморительный"],
       ["peril", "пЭрил", "угроза"],
+      ["suspense", "сэспЭнс", "напряжение (ожидание)"],
+      ["violate", "вАялэйт", "нарушать"],
+      ["ravage", "рЭвэдж", "опустошать (разорять)"],
     ];
 
     const arrayVerbWords = [
@@ -943,10 +946,7 @@
 
     buttonNextWord.addEventListener("click", function () {
       actionNextWord(currentMode);
-
-      if (currentMode < 3) {
-        achieve40Words();
-      }
+      achieve40Words();
     });
 
     buttonAddWord.addEventListener("click", function () {
