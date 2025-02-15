@@ -833,18 +833,15 @@
 
     let currentMode = 1; // Default mode
     let currentArray = modes[currentMode].array;
-
-    switchMode(currentMode);
+    switchMode(1);
 
     function switchMode(mode) {
       currentMode = mode;
-
       shuffleAllArrays();
       currentArray = modes[currentMode].array;
       indexOfCurrentWord = 0;
       clearStyles();
       modeActiveColor(currentMode);
-
       divsLayout(currentMode);
     }
 
