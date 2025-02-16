@@ -196,6 +196,10 @@
       font-size: 5svh !important;
     }
 
+    .reverseBG {
+      background: #ff5400 !important;
+    }
+
     /*   #reverseMode {
       position: absolute;
       right: 1%;
@@ -784,6 +788,19 @@
     let indexMini = 0;
     let indexOfCurrentWord = 0;
 
+    let modesReverse = {
+      1: {
+        wordOrder: [2, 0, 1],
+        showDiv: [div2, div3],
+        hideDiv: [div1],
+      },
+      2: {
+        wordOrder: [0, 2, 1],
+        showDiv: [div2],
+        hideDiv: [div1, div3],
+      },
+    }
+
     let modes = {
       1: {
         wordOrder: [2, 0, 1],
@@ -846,6 +863,23 @@
     let currentReverseMode = 1;
     switchMode(1);
 
+    function reverseModeDivs(currentReverseMode, isMini) {
+      modesReverse[currentReverseMode].showDiv.forEach(showThis);
+      modesReverse[currentReverseMode].hideDiv.forEach(hideThis);
+
+      let mode = modes[currentReverseMode].wordOrder;
+      let word;
+      if (isMini) {
+        word = arrayMini[indexMini];
+      } else {
+        word = currentArray[indexOfCurrentWord];
+      }
+
+      div1.innerText = word[mode[0]];
+      div2.innerText = word[mode[1]];
+      div3.innerText = word[mode[2]];
+    }
+
     function switchMode(mode) {
       currentMode = mode;
       currentReverseMode = 1;
@@ -859,10 +893,6 @@
 
     // Show or hide divs
     function divsLayout(currentMode, isMini) {
-      if (currentMode < 3) {
-        currentMode = currentReverseMode;
-      }
-
       modes[currentMode].showDiv.forEach(showThis);
       modes[currentMode].hideDiv.forEach(hideThis);
       modes[currentMode].showBtn.forEach(showThis);
@@ -896,6 +926,10 @@
         div1.innerText = word[mode[0]];
         div2.innerText = word[mode[1]];
         div3.innerText = word[mode[2]];
+      }
+
+      if (currentMode < 3) {
+        reverseModeDivs(currentReverseMode, isMini);
       }
     }
 
@@ -974,11 +1008,14 @@
       actionAddWord(currentMode);
     });
 
+    // Reverse mode
     reverseMode.addEventListener("click", function () {
       if (currentReverseMode === 1) {
         currentReverseMode = 2;
+        reverseMode.classList.add("reverseBG");
       } else {
         currentReverseMode = 1;
+        reverseMode.classList.remove("reverseBG");
       }
 
       shuffleAllArrays();
@@ -986,15 +1023,13 @@
       indexOfCurrentWord = 0;
       buttonNextWord.innerHTML = currentArray.length;
       buttonCountWord.innerHTML = arrayMini.length;
-      divsLayout(currentMode);
+      reverseModeDivs(currentReverseMode);
     });
 
     function textToSpeach(currentMode) {
-      if (currentReverseMode !== 2) {
-        if ("speechSynthesis" in window) {
-          const utterance = new SpeechSynthesisUtterance(div2.textContent);
-          window.speechSynthesis.speak(utterance);
-        }
+      if ("speechSynthesis" in window) {
+        const utterance = new SpeechSynthesisUtterance(div2.textContent);
+        window.speechSynthesis.speak(utterance);
       }
     }
 
@@ -1017,6 +1052,7 @@
       arrayMini.length = 0;
       buttonNextWord.innerHTML = currentArray.length;
       buttonCountWord.innerHTML = arrayMini.length;
+      reverseMode.classList.remove("reverseBG");
       hideThis(achievement40Words);
     }
 
