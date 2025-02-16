@@ -111,7 +111,9 @@
     }
 
     #navTop>div:active,
-    #navBottom>div:active {
+    #navBottom>div:active,
+    #buttonShowTranslation:active,
+    #reverseMode:active {
       transform: scale(0.9);
     }
 
@@ -136,10 +138,6 @@
       justify-content: center;
       align-content: center;
       background: transparent;
-    }
-
-    #buttonShowTranslation:active {
-      transform: scale(0.9);
     }
 
     #div1 {
@@ -198,6 +196,19 @@
       font-size: 5svh !important;
     }
 
+    /*   #reverseMode {
+      position: absolute;
+      right: 1%;
+      top: 42%;
+      aspect-ratio: 1/1;
+      height: 9svh;
+      font-size: 5svh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #372237;
+    } */
+
     #achievement40Words {
       display: none;
       position: absolute;
@@ -224,7 +235,7 @@
       <div id="buttonMode3">3</div>
       <div id="buttonMode4">4</div>
       <div id="buttonMode5">5</div>
-      <div id="buttonMode6">+</div>
+      <div id="reverseMode">+</div>
     </div>
     <div id="buttonShowTranslation">
       <div id="div1"><span></span></div>
@@ -762,6 +773,7 @@
     const buttonMode4 = document.getElementById("buttonMode4");
     const buttonMode5 = document.getElementById("buttonMode5");
     const buttonMode6 = document.getElementById("buttonMode6");
+    const reverseMode = document.getElementById("reverseMode");
     const buttonAddWord = document.getElementById("buttonAddWord");
     const buttonNextWord = document.getElementById("buttonNextWord");
     const buttonCountWord = document.getElementById("buttonCountWord");
@@ -789,7 +801,7 @@
         translationDiv: [div1, div3],
         showBtn: [buttonAddWord, buttonCountWord],
         hideBtn: [],
-        array: arrayAllWords,
+        array: arrayLvl2Words,
       },
       3: {
         wordOrder: [2, 0, 1],
@@ -831,10 +843,12 @@
 
     let currentMode = 1; // Default mode
     let currentArray = modes[currentMode].array;
+    let currentReverseMode = 1;
     switchMode(1);
 
     function switchMode(mode) {
       currentMode = mode;
+      currentReverseMode = 1;
       shuffleAllArrays();
       currentArray = modes[currentMode].array;
       indexOfCurrentWord = 0;
@@ -845,6 +859,10 @@
 
     // Show or hide divs
     function divsLayout(currentMode, isMini) {
+      if (currentMode < 3) {
+        currentMode = currentReverseMode;
+      }
+
       modes[currentMode].showDiv.forEach(showThis);
       modes[currentMode].hideDiv.forEach(hideThis);
       modes[currentMode].showBtn.forEach(showThis);
@@ -862,7 +880,13 @@
     // What word in what div
     function wordsLayout(currentMode, isMini = false) {
       let mode = modes[currentMode].wordOrder;
-      let word = isMini ? arrayMini[indexMini] : currentArray[indexOfCurrentWord]; // if...else
+      let word;
+
+      if (isMini) {
+        word = arrayMini[indexMini];
+      } else {
+        word = currentArray[indexOfCurrentWord];
+      }
 
       if (currentMode === 5) {
         div1.innerText = word[mode[0]];
@@ -881,6 +905,7 @@
       indexOfCurrentWord = indexOfCurrentWord % currentArray.length;
       divsLayout(currentMode);
       buttonNextWord.innerHTML = currentArray.length - indexOfCurrentWord;
+      console.log(currentReverseMode);
     }
 
     // Show next word in mini array
@@ -917,19 +942,20 @@
 
     // Show Translation
     function ShowTranslation(currentMode) {
-      modes[currentMode].translationDiv.forEach(showThis);
+      modes[currentReverseMode].translationDiv.forEach(showThis);
     }
 
-    // Switch mode on click
+    buttonShowTranslation.addEventListener("click", function () {
+      ShowTranslation(currentMode);
+    });
+
+
+    // Switch mode
     document.querySelectorAll("[id^=buttonMode]").forEach((button, index) => {
       button.addEventListener("click", () => {
         const mode = index + 1;
         switchMode(mode);
       });
-    });
-
-    buttonShowTranslation.addEventListener("click", function () {
-      ShowTranslation(currentMode);
     });
 
     // Text to speach
@@ -948,10 +974,27 @@
       actionAddWord(currentMode);
     });
 
+    reverseMode.addEventListener("click", function () {
+      if (currentReverseMode === 1) {
+        currentReverseMode = 2;
+      } else {
+        currentReverseMode = 1;
+      }
+
+      shuffleAllArrays();
+      indexMini = 0;
+      indexOfCurrentWord = 0;
+      buttonNextWord.innerHTML = currentArray.length;
+      buttonCountWord.innerHTML = arrayMini.length;
+      divsLayout(currentMode);
+    });
+
     function textToSpeach(currentMode) {
-      if ("speechSynthesis" in window) {
-        const utterance = new SpeechSynthesisUtterance(div2.textContent);
-        window.speechSynthesis.speak(utterance);
+      if (currentReverseMode !== 2) {
+        if ("speechSynthesis" in window) {
+          const utterance = new SpeechSynthesisUtterance(div2.textContent);
+          window.speechSynthesis.speak(utterance);
+        }
       }
     }
 
@@ -970,7 +1013,6 @@
       buttonMode3.style.background = "";
       buttonMode4.style.background = "";
       buttonMode5.style.background = "";
-      buttonMode6.style.background = "";
       indexMini = 0;
       arrayMini.length = 0;
       buttonNextWord.innerHTML = currentArray.length;
