@@ -1010,20 +1010,23 @@
 
     // Reverse mode
     reverseMode.addEventListener("click", function () {
-      if (currentReverseMode === 1) {
-        currentReverseMode = 2;
-        reverseMode.classList.add("reverseBG");
-      } else {
-        currentReverseMode = 1;
-        reverseMode.classList.remove("reverseBG");
-      }
+      if (currentMode < 3) {
+        if (currentReverseMode === 1) {
+          currentReverseMode = 2;
+        } else {
+          currentReverseMode = 1;
+        }
 
-      shuffleAllArrays();
-      indexMini = 0;
-      indexOfCurrentWord = 0;
-      buttonNextWord.innerHTML = currentArray.length;
-      buttonCountWord.innerHTML = arrayMini.length;
-      reverseModeDivs(currentReverseMode);
+        reverseMode.classList.toggle("reverseBG");
+
+        shuffleAllArrays();
+        indexMini = 0;
+        indexOfCurrentWord = 0;
+        buttonNextWord.innerHTML = currentArray.length;
+        buttonCountWord.innerHTML = arrayMini.length;
+        divsLayout(currentMode);
+        console.log(currentMode);
+      }
     });
 
     function textToSpeach(currentMode) {
