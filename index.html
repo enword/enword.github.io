@@ -279,7 +279,6 @@
       ["meet", "мит", "встречаю"],
       ["pay", "пэй", "платить"],
       ["play", "плэй", "играть"],
-      ["put", "пут", "класть"],
       ["read", "рид", "читать"],
       ["see", "си", "видеть"],
       ["sell", "сэл", "продать"],
@@ -297,7 +296,6 @@
       ["begin", "бигИн", "начать"],
       ["choose", "чуз", "выбрать"],
       ["come", "кам", "приходи"],
-      ["cut", "кат", "резать"],
       ["find", "файнд", "найти"],
       ["dryer", "дрАер", "сушилка"],
       ["fly", "флай", "лететь"],
@@ -789,19 +787,6 @@
     let indexMini = 0;
     let indexOfCurrentWord = 0;
 
-    let modesReverse = {
-      1: {
-        wordOrder: [2, 0, 1],
-        showDiv: [div2, div3],
-        hideDiv: [div1],
-      },
-      2: {
-        wordOrder: [0, 2, 1],
-        showDiv: [div2],
-        hideDiv: [div1, div3],
-      },
-    }
-
     let modes = {
       1: {
         wordOrder: [2, 0, 1],
@@ -864,23 +849,6 @@
     let currentReverseMode = 1;
     switchMode(1);
 
-    function reverseModeDivs(currentReverseMode, isMini) {
-      modesReverse[currentReverseMode].showDiv.forEach(showThis);
-      modesReverse[currentReverseMode].hideDiv.forEach(hideThis);
-
-      let mode = modes[currentReverseMode].wordOrder;
-      let word;
-      if (isMini) {
-        word = arrayMini[indexMini];
-      } else {
-        word = currentArray[indexOfCurrentWord];
-      }
-
-      div1.innerText = word[mode[0]];
-      div2.innerText = word[mode[1]];
-      div3.innerText = word[mode[2]];
-    }
-
     function switchMode(mode) {
       currentMode = mode;
       currentReverseMode = 1;
@@ -911,8 +879,8 @@
     // What word in what div
     function wordsLayout(currentMode, isMini = false) {
       let mode = modes[currentMode].wordOrder;
-      let word;
 
+      let word;
       if (isMini) {
         word = arrayMini[indexMini];
       } else {
@@ -930,8 +898,16 @@
       }
 
       if (currentMode < 3) {
-        reverseModeDivs(currentReverseMode, isMini);
+        reverseModeDivs(currentReverseMode, word);
       }
+    }
+
+    function reverseModeDivs(currentReverseMode, word) {
+      modes[currentReverseMode].showDiv.forEach(showThis);
+      modes[currentReverseMode].hideDiv.forEach(hideThis);
+
+      let mode = modes[currentReverseMode].wordOrder;
+      [div1.innerText, div2.innerText, div3.innerText] = mode.map(i => word[i]);
     }
 
     // Show next word
@@ -940,7 +916,6 @@
       indexOfCurrentWord = indexOfCurrentWord % currentArray.length;
       divsLayout(currentMode);
       buttonNextWord.innerHTML = currentArray.length - indexOfCurrentWord;
-      console.log(currentReverseMode);
     }
 
     // Show next word in mini array
@@ -963,13 +938,12 @@
 
       // Prevent duplicate
       if (arrayMini.includes(word)) {
-        console.log("Duplicate");
+        console.log("duplicate");
       } else {
         arrayMini.push(word);
       }
 
       buttonCountWord.innerHTML = arrayMini.length;
-      indexMini = 0;
 
       for (x of arrayMini) {
         console.log(x);
@@ -977,12 +951,12 @@
     }
 
     // Show Translation
-    function ShowTranslation(currentMode) {
+    function showTranslation(currentMode) {
       modes[currentReverseMode].translationDiv.forEach(showThis);
     }
 
     buttonShowTranslation.addEventListener("click", function () {
-      ShowTranslation(currentMode);
+      showTranslation(currentMode);
     });
 
 
@@ -1027,7 +1001,6 @@
         buttonNextWord.innerHTML = currentArray.length;
         buttonCountWord.innerHTML = arrayMini.length;
         divsLayout(currentMode);
-        console.log(currentMode);
       }
     });
 
