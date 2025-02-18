@@ -1017,10 +1017,11 @@
       button.addEventListener("click", () => {
         const mode = index + 1;
         switchMode(mode);
+        console.log(currentReverseMode);
       });
     });
 
-    function textToSpeach(currentMode, currentReverseMode) {
+    function textToSpeach(currentMode) {
       if ("speechSynthesis" in window) {
         const utterance = new SpeechSynthesisUtterance(div2.textContent);
         window.speechSynthesis.speak(utterance);
@@ -1029,10 +1030,10 @@
 
     // Text to speach
     div2.addEventListener("click", function () {
-      if (currentReverseMode === false) {
-        textToSpeach(currentMode, currentReverseMode);
+      if (/[а-яА-ЯёЁ]/.test(div2.textContent)) {
+        console.log("not english text");
       } else {
-        console.log("text to speach is off because reverse mode is: " + currentReverseMode);
+        textToSpeach(currentMode);
       }
     });
 
