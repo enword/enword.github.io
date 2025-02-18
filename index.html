@@ -832,12 +832,15 @@
         hideBtn: [buttonAddWord, buttonCountWord],
         array: arrayVerbWords,
       },
-      6: {
+    };
+
+    let modesReverse = {
+      1: {
         wordOrder: [0, 2, 1],
         showDiv: [div2],
         hideDiv: [div1, div3],
       },
-    };
+    }
 
     let currentMode = 1; // Default mode
     let currentArray = modes[currentMode].array;
@@ -892,18 +895,19 @@
         div3.innerText = word[mode[2]];
       }
 
-      divsLayoutReverse(currentReverseMode, word);
+      if (currentMode < 3) {
+        divsLayoutReverse(currentReverseMode, word);
+        console.log("reverse mode: " + currentReverseMode);
+      }
     }
 
     function divsLayoutReverse(currentReverseMode, word) {
       if (currentReverseMode) {
-        modes[6].showDiv.forEach(showThis);
-        modes[6].hideDiv.forEach(hideThis);
-        [div1.innerText, div2.innerText, div3.innerText] = modes[6].wordOrder.map(i => word[i]);
+        modesReverse[1].showDiv.forEach(showThis);
+        modesReverse[1].hideDiv.forEach(hideThis);
+        [div1.innerText, div2.innerText, div3.innerText] = modesReverse[1].wordOrder.map(i => word[i]);
       } else {
-        modes[currentMode].showDiv.forEach(showThis);
-        modes[currentMode].hideDiv.forEach(hideThis);
-        [div1.innerText, div2.innerText, div3.innerText] = modes[currentMode].wordOrder.map(i => word[i]);
+        // do nothing
       }
     }
 
@@ -918,7 +922,6 @@
         buttonNextWord.innerHTML = currentArray.length;
         buttonCountWord.innerHTML = arrayMini.length;
         divsLayout(currentMode);
-        console.log(currentReverseMode);
       }
     });
 
