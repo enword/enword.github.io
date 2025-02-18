@@ -985,8 +985,10 @@
 
     // Text to speach
     div2.addEventListener("click", function () {
-      if (currentReverseMode = false) {
+      if (currentReverseMode === false) {
         textToSpeach(currentMode);
+      } else {
+        console.log("text to speach is off because reverse mode is: " + currentReverseMode);
       }
     });
 
