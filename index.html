@@ -1020,10 +1020,17 @@
       });
     });
 
+    function textToSpeach(currentMode, currentReverseMode) {
+      if ("speechSynthesis" in window) {
+        const utterance = new SpeechSynthesisUtterance(div2.textContent);
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
     // Text to speach
     div2.addEventListener("click", function () {
       if (currentReverseMode === false) {
-        textToSpeach(currentMode);
+        textToSpeach(currentMode, currentReverseMode);
       } else {
         console.log("text to speach is off because reverse mode is: " + currentReverseMode);
       }
@@ -1037,14 +1044,6 @@
     buttonAddWord.addEventListener("click", function () {
       actionAddWord(currentMode);
     });
-
-
-    function textToSpeach(currentMode) {
-      if ("speechSynthesis" in window) {
-        const utterance = new SpeechSynthesisUtterance(div2.textContent);
-        window.speechSynthesis.speak(utterance);
-      }
-    }
 
     // Active buttonMode color
     function modeActiveColor(currentMode) {
