@@ -870,6 +870,7 @@
         wordOrder: [0, 2, 1],
         showDiv: [div2],
         hideDiv: [div1, div3],
+        translationDiv: [div1, div3],
       },
     }
 
@@ -1003,12 +1004,16 @@
     }
 
     // Show Translation
-    function showTranslation(currentMode) {
-      modes[currentMode].translationDiv.forEach(showThis);
+    function showTranslation(currentMode, currentReverseMode) {
+      if (currentReverseMode === true) {
+        modesReverse[1].translationDiv.forEach(showThis);
+      } else {
+        modes[currentMode].translationDiv.forEach(showThis);
+      }
     }
 
     buttonShowTranslation.addEventListener("click", function () {
-      showTranslation(currentMode);
+      showTranslation(currentMode, currentReverseMode);
     });
 
 
