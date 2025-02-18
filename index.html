@@ -423,7 +423,6 @@
       ["hitherto", "хизэртУ", "до сих пор"],
       ["huddle", "хадл", "толпиться"],
       ["husky", "хАски", "хриплый"],
-      ["intricate", "Интрикэт", "запутанный"],
       ["leisure", "лИжэр", "досуг"],
       ["morose", "морОус", "угрюмый"],
       ["mutter", "мАтэр", "бормотать"],
@@ -446,7 +445,7 @@
       ["seldom", "", "редко"],
       ["shudder", "шАдэр", "вздрагивать"],
       ["sinister", "сИнистэр", "зловещий"],
-      ["sombre", "сОмбэр", "мрачный"],
+      ["sombre", "сОмбэр", "хмурый"],
       ["startled", "стАртэлт", "испуганный"],
       ["tamper", "тЭмпэр", "вмешиваться"],
       ["temper", "тЭмпэр", "характер"],
@@ -798,10 +797,10 @@
         array: arrayAllWords,
       },
       2: {
-        wordOrder: [0, 2, 1],
-        showDiv: [div2],
-        hideDiv: [div1, div3],
-        translationDiv: [div1, div3],
+        wordOrder: [2, 0, 1],
+        showDiv: [div2, div3],
+        hideDiv: [div1],
+        translationDiv: [div1],
         showBtn: [buttonAddWord, buttonCountWord],
         hideBtn: [],
         array: arrayLvl2Words,
@@ -834,24 +833,20 @@
         array: arrayVerbWords,
       },
       6: {
-        wordOrder: [2, 0, 1],
-        showDiv: [div2, div3],
-        hideDiv: [div1],
-        translationDiv: [div1],
-        showBtn: [buttonAddWord, buttonCountWord],
-        hideBtn: [],
-        array: arrayLvl2Words,
+        wordOrder: [0, 2, 1],
+        showDiv: [div2],
+        hideDiv: [div1, div3],
       },
     };
 
     let currentMode = 1; // Default mode
     let currentArray = modes[currentMode].array;
-    let currentReverseMode = 1;
+    let currentReverseMode = false;
     switchMode(1);
 
     function switchMode(mode) {
       currentMode = mode;
-      currentReverseMode = 1;
+      currentReverseMode = false;
       shuffleAllArrays();
       currentArray = modes[currentMode].array;
       indexOfCurrentWord = 0;
@@ -897,18 +892,35 @@
         div3.innerText = word[mode[2]];
       }
 
-      if (currentMode < 3) {
-        reverseModeDivs(currentReverseMode, word);
+      divsLayoutReverse(currentReverseMode, word);
+    }
+
+    function divsLayoutReverse(currentReverseMode, word) {
+      if (currentReverseMode) {
+        modes[6].showDiv.forEach(showThis);
+        modes[6].hideDiv.forEach(hideThis);
+        [div1.innerText, div2.innerText, div3.innerText] = modes[6].wordOrder.map(i => word[i]);
+      } else {
+        modes[currentMode].showDiv.forEach(showThis);
+        modes[currentMode].hideDiv.forEach(hideThis);
+        [div1.innerText, div2.innerText, div3.innerText] = modes[currentMode].wordOrder.map(i => word[i]);
       }
     }
 
-    function reverseModeDivs(currentReverseMode, word) {
-      modes[currentReverseMode].showDiv.forEach(showThis);
-      modes[currentReverseMode].hideDiv.forEach(hideThis);
+    reverseMode.addEventListener("click", function () {
+      if (currentMode < 3) {
+        currentReverseMode = !currentReverseMode;
 
-      let mode = modes[currentReverseMode].wordOrder;
-      [div1.innerText, div2.innerText, div3.innerText] = mode.map(i => word[i]);
-    }
+        reverseMode.classList.toggle("reverseBG");
+        shuffleAllArrays();
+        indexMini = 0;
+        indexOfCurrentWord = 0;
+        buttonNextWord.innerHTML = currentArray.length;
+        buttonCountWord.innerHTML = arrayMini.length;
+        divsLayout(currentMode);
+        console.log(currentReverseMode);
+      }
+    });
 
     // Show next word
     function actionNextWord(currentMode) {
@@ -952,7 +964,7 @@
 
     // Show Translation
     function showTranslation(currentMode) {
-      modes[currentReverseMode].translationDiv.forEach(showThis);
+      modes[currentMode].translationDiv.forEach(showThis);
     }
 
     buttonShowTranslation.addEventListener("click", function () {
@@ -970,7 +982,7 @@
 
     // Text to speach
     div2.addEventListener("click", function () {
-      if (currentReverseMode !== 2) {
+      if (currentReverseMode = false) {
         textToSpeach(currentMode);
       }
     });
@@ -984,25 +996,6 @@
       actionAddWord(currentMode);
     });
 
-    // Reverse mode
-    reverseMode.addEventListener("click", function () {
-      if (currentMode < 3) {
-        if (currentReverseMode === 1) {
-          currentReverseMode = 2;
-        } else {
-          currentReverseMode = 1;
-        }
-
-        reverseMode.classList.toggle("reverseBG");
-
-        shuffleAllArrays();
-        indexMini = 0;
-        indexOfCurrentWord = 0;
-        buttonNextWord.innerHTML = currentArray.length;
-        buttonCountWord.innerHTML = arrayMini.length;
-        divsLayout(currentMode);
-      }
-    });
 
     function textToSpeach(currentMode) {
       if ("speechSynthesis" in window) {
