@@ -205,8 +205,8 @@
             display: none;
             position: absolute;
             right: 1%;
-            top: calc(50% - 7svh);
-            aspect-ratio: 1/1;
+            top: calc(80% - 7svh);
+            aspect-ratio: 1/1.3;
             height: 7svh;
             font-size: 2svh;
             justify-content: center;
@@ -1122,34 +1122,55 @@
                 return;
             }
 
-            const text = arrayMini.map(item => item.join(" | ")).join("\n"); // Format as CSV
-
-            // Ensure UTF-8 BOM for proper encoding
-            const blob = new Blob(["\ufeff" + text], { type: "text/plain;charset=utf-8" });
-
-            // Get current date and time
+            // Get current date and time for filename
             const now = new Date();
             const months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+            const month = months[now.getMonth()];
+            const day = now.getDate();
+            const hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, "0");
+            const timeFormatted = `${hours}${minutes}`;
 
-            const month = months[now.getMonth()]; // Short month name
-            const day = now.getDate(); // Day of the month
-            const hours = now.getHours(); // Hours (0-23)
-            const minutes = now.getMinutes(); // Minutes (0-59)
+            const fileName = `enWord_${month}${day}_${timeFormatted}.html`;
 
-            // Format time as HMM (e.g., 2:35 → 235, 14:05 → 1405)
-            const timeFormatted = `${hours}${minutes.toString().padStart(2, "0")}`;
+            // Generate HTML content with a table
+            const htmlContent = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Word List</title>
+            <style>
+                body { font-family: Arial, sans-serif; }
+                table { width: 100%; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                th { background-color: #f4f4f4; }
+            </style>
+        </head>
+        <body>
+            <h2>${month} ${day}</h2>
+            <table>
+                <tr><th>English</th><th>Transcription</th><th>Translation</th></tr>
+                ${arrayMini.map(item => `<tr><td>${item[0]}</td><td>${item[1]}</td><td>${item[2]}</td></tr>`).join("")}
+            </table>
+        </body>
+        </html>
+    `;
 
-            const fileName = `enWord_${month}${day}_${timeFormatted}.txt`;
+            // Create a Blob with the HTML content
+            const blob = new Blob(["\ufeff" + htmlContent], { type: "text/html;charset=utf-8" });
 
+            // Create a link and trigger the download
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = fileName; // Set the filename with timestamp
+            a.download = fileName;
             a.style.display = "none";
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            URL.revokeObjectURL(url); // Release the object URL
+            URL.revokeObjectURL(url);
         }
 
         // Add a button to trigger the download       
