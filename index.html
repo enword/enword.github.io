@@ -1124,13 +1124,27 @@
 
             const text = arrayMini.map(item => item.join(" | ")).join("\n"); // Format as CSV
 
-            // Ensure UTF-8 BOM is added to the file for proper encoding
+            // Ensure UTF-8 BOM for proper encoding
             const blob = new Blob(["\ufeff" + text], { type: "text/plain;charset=utf-8" });
+
+            // Get current date and time
+            const now = new Date();
+            const months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+            const month = months[now.getMonth()]; // Short month name
+            const day = now.getDate(); // Day of the month
+            const hours = now.getHours(); // Hours (0-23)
+            const minutes = now.getMinutes(); // Minutes (0-59)
+
+            // Format time as HMM (e.g., 2:35 → 235, 14:05 → 1405)
+            const timeFormatted = `${hours}${minutes.toString().padStart(2, "0")}`;
+
+            const fileName = `enWord_${month}${day}_${timeFormatted}.txt`;
 
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = "enWord.txt"; // Set the filename
+            a.download = fileName; // Set the filename with timestamp
             a.style.display = "none";
             document.body.appendChild(a);
             a.click();
