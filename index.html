@@ -1123,8 +1123,9 @@
             }
 
             const text = arrayMini.map(item => item.join(" | ")).join("\n"); // Format as CSV
+            const encodedContent = new TextEncoder().encode(text); // Encode to UTF-8
 
-            const blob = new Blob([text], { type: "text/plain" });
+            const blob = new Blob([encodedContent], { type: "text/plain;charset=utf-8" }); // Specify UTF-8
             const url = URL.createObjectURL(blob);
 
             const a = document.createElement("a");
