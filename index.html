@@ -1122,26 +1122,22 @@
                 return;
             }
 
-            const text = arrayMini.map(item => item.join(" | ")).join("\n");
-            const encoder = new TextEncoder();
-            const encodedContent = encoder.encode(text);
+            const text = arrayMini.map(item => item.join(" | ")).join("\n"); // Format as CSV
 
-            // Create a new Uint8Array *without* BOM
-            const utf8Array = new Uint8Array(encodedContent.length);
-            utf8Array.set(encodedContent, 0); // Copy encoded content
+            // Ensure UTF-8 BOM is added to the file for proper encoding
+            const blob = new Blob(["\ufeff" + text], { type: "text/plain;charset=utf-8" });
 
-            const blob = new Blob([utf8Array], { type: "text/plain;charset=utf-8" });
             const url = URL.createObjectURL(blob);
-
             const a = document.createElement("a");
             a.href = url;
-            a.download = "enWord.txt";
+            a.download = "enWord.txt"; // Set the filename
             a.style.display = "none";
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            URL.revokeObjectURL(url); // Release the object URL
         }
+
 
         // Add a button to trigger the download       
         buttonDownload.addEventListener("click", downloadArrayMini);
