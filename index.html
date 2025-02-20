@@ -1157,7 +1157,7 @@
         }
         th,
         td {
-            border: 1px solid #372237;
+            border: 2px solid #372237;
             padding: 8px;
             text-align: center;
         }
@@ -1169,7 +1169,6 @@
         <body>
             <h2>${month} ${day}</h2>
             <table>
-                <tr><th>English</th><th>Transcription</th><th>Translation</th></tr>
                 ${arrayMini.map(item => `<tr><td>${item[0]}</td><td>${item[1]}</td><td>${item[2]}</td></tr>`).join("")}
             </table>
         </body>
