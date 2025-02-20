@@ -211,8 +211,8 @@
             font-size: 2svh;
             justify-content: center;
             align-items: center;
-            background: #372237;
-            /* box-shadow: inset 0 0 0 0.3svh #ffffff; */
+            background: transparent;
+            box-shadow: inset 0 0 0 0.3svh var(--title-color);
         }
 
         #achievement40Words {
@@ -1137,7 +1137,6 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url); // Release the object URL
         }
-
 
         // Add a button to trigger the download       
         buttonDownload.addEventListener("click", downloadArrayMini);
