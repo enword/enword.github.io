@@ -1192,6 +1192,29 @@
         // Add a button to trigger the download       
         buttonDownload.addEventListener("click", downloadArrayMini);
 
+        //
+        //
+        fetch('new.html')
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const table = doc.querySelector('table');
+                const rows = table.querySelectorAll('tr');
+
+                const dataArray = [];
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    const rowData = Array.from(cells).map(cell => cell.textContent);
+                    dataArray.push(rowData);
+                });
+
+                console.log(dataArray); // Output the array to the console
+
+                // Optionally, you can display the table in html_2
+                document.getElementById('table-container').appendChild(table);
+            });
+
     </script>
 </body>
 
