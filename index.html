@@ -1202,17 +1202,13 @@
                 const table = doc.querySelector('table');
                 const rows = table.querySelectorAll('tr');
 
-                const dataArray = [];
+                const arrayUnknown = [];
                 rows.forEach(row => {
                     const cells = row.querySelectorAll('td');
                     const rowData = Array.from(cells).map(cell => cell.textContent);
-                    dataArray.push(rowData);
+                    arrayUnknown.push(rowData);
                 });
-
-                console.log(dataArray); // Output the array to the console
-
-                // Optionally, you can display the table in html_2
-                document.getElementById('table-container').appendChild(table);
+                console.log(arrayUnknown); // Output the array to the console         
             });
 
     </script>
