@@ -834,11 +834,6 @@
                 document.dispatchEvent(new CustomEvent('dataReady', { detail: arrayUnknown }));
             });
 
-        // Anywhere in your script
-        document.addEventListener('dataReady', (event) => {
-            console.log('Data is now available:', event.detail);
-        });
-
         console.log(arrayUnknown);
 
         let modes = {
