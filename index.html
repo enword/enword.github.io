@@ -767,16 +767,6 @@
             }
         }
 
-        function shuffleAllArrays() {
-            shuffle(arrayAllWords);
-            shuffle(arrayQuestionWords);
-            shuffle(arrayLongWords);
-            shuffle(arrayPhrases);
-            shuffle(arrayVerbWords);
-            shuffle(arrayLvl2Words);
-        }
-        shuffleAllArrays(); // Shuffle arrays OFTEN, it is important! Don"t change.
-
         window.speechSynthesis.getVoices(); // Preload TTS voices
 
         // Store references to the elements in variables
@@ -996,7 +986,7 @@
                 currentReverseMode = !currentReverseMode;
 
                 reverseMode.classList.toggle("reverseBG");
-                shuffleAllArrays();
+                shuffle(currentArray);
                 indexMini = 0;
                 indexOfCurrentWord = 0;
                 buttonNextWord.innerHTML = currentArray.length;
