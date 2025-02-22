@@ -959,7 +959,6 @@
             clearStyles();
             modeActiveColor(currentMode);
             divsLayout(currentMode);
-            buttonNav.innerHTML = currentMode;
         }
 
         // Show or hide divs
@@ -1145,6 +1144,7 @@
             buttonMode5.style.background = "";
             buttonMode6.style.background = "";
             buttonMode7.style.background = "";
+            buttonNav.innerHTML = currentMode;
             indexMini = 0;
             arrayMini.length = 0;
             currentArray.length > 0 ? buttonNextWord.innerHTML = currentArray.length : null;
