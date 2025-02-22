@@ -817,6 +817,7 @@
         let indexOfCurrentWord = 0;
         let arrayUnknown = [];
 
+        // Fetch words from new.html
         async function initializeArray() {
             const response = await fetch('new.html');
             const html = await response.text();
