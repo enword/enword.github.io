@@ -830,9 +830,15 @@
                     const rowData = Array.from(cells).map(cell => cell.textContent);
                     arrayUnknown.push(rowData);
                 });
-
-                document.dispatchEvent(new CustomEvent('dataReady', { detail: arrayUnknown }));
             });
+
+        // Function to wait for `arrayUnknown` and return it
+        async function getArray() {
+            while (!arrayUnknown) {
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+            return arrayUnknown;
+        }
 
         console.log(arrayUnknown);
 
