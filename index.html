@@ -840,8 +840,6 @@
             return arrayUnknown;
         }
 
-        console.log(arrayUnknown);
-
         let modes = {
             1: {
                 wordOrder: [2, 0, 1],
@@ -1012,6 +1010,7 @@
             indexOfCurrentWord = indexOfCurrentWord % currentArray.length;
             divsLayout(currentMode);
             buttonNextWord.innerHTML = currentArray.length - indexOfCurrentWord;
+            console.log(arrayUnknown);
         }
 
         // Show next word in mini array
