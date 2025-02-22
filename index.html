@@ -818,6 +818,27 @@
         let indexOfCurrentWord = 0;
         let arrayUnknown = [];
 
+        async function initializeArray() {
+            const response = await fetch('new.html');
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const table = doc.querySelector('table');
+            const rows = table.querySelectorAll('tr');
+
+            // Update the global variable directly
+            arrayUnknown = Array.from(rows).map(row => {
+                const cells = row.querySelectorAll('td');
+                return Array.from(cells).map(cell => cell.textContent);
+            });
+        }
+
+        initializeArray().then(() => {
+            console.log("Data fetched:", arrayUnknown);
+            // Now update your modes object here, once arrayUnknown has been populated.
+            modes[7].array = arrayUnknown;
+        });
+
         let modes = {
             1: {
                 wordOrder: [2, 0, 1],
@@ -954,7 +975,6 @@
 
             if (currentMode < 3) {
                 divsLayoutReverse(currentReverseMode, word);
-                console.log("reverse mode: " + currentReverseMode);
             }
         }
 
@@ -988,7 +1008,6 @@
             indexOfCurrentWord = indexOfCurrentWord % currentArray.length;
             divsLayout(currentMode);
             buttonNextWord.innerHTML = currentArray.length - indexOfCurrentWord;
-            console.log(arrayUnknown);
         }
 
         // Show next word in mini array
@@ -1042,11 +1061,6 @@
             button.addEventListener("click", () => {
                 const mode = index + 1;
                 switchMode(mode);
-
-                if (currentMode === 7) {
-                    getArray();
-                    console.log(arrayUnknown);
-                }
             });
         });
 
@@ -1078,7 +1092,6 @@
             if (arrayMini.length > 0) {
                 buttonDownload.style.display = "flex";
             } else {
-                console.log("wtf");
             }
         });
 
@@ -1209,31 +1222,6 @@
 
         // Add a button to trigger the download       
         buttonDownload.addEventListener("click", downloadArrayMini);
-
-        // Fetch
-        fetch('new.html')
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const table = doc.querySelector('table');
-                const rows = table.querySelectorAll('tr');
-
-                arrayUnknown = [];
-                rows.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    const rowData = Array.from(cells).map(cell => cell.textContent);
-                    arrayUnknown.push(rowData);
-                });
-            });
-
-        // Function to wait for `arrayUnknown` and return it
-        async function getArray() {
-            while (arrayUnknown.length === 0) {
-                await new Promise(resolve => setTimeout(resolve, 50));
-            }
-            return arrayUnknown;
-        }
 
     </script>
 </body>
