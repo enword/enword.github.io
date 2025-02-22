@@ -1042,8 +1042,6 @@
             button.addEventListener("click", () => {
                 const mode = index + 1;
                 switchMode(mode);
-                console.log(currentArray);
-                console.log(arrayUnknown.length);
             });
         });
 
@@ -1098,6 +1096,8 @@
             buttonMode7.style.background = "";
             indexMini = 0;
             arrayMini.length = 0;
+            console.log(currentArray);
+            console.log(arrayUnknown.length);
             buttonNextWord.innerHTML = currentArray.length;
             buttonCountWord.innerHTML = arrayMini.length;
             reverseMode.classList.remove("reverseBG");
