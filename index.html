@@ -21,7 +21,7 @@
             margin: 0;
             color: #ffffff;
             text-align: center;
-            border-radius: 7%;
+            border-radius: 5px;
             font-family: sans-serif;
             font-weight: 900;
         }
@@ -68,7 +68,7 @@
 
         #navTop {
             width: 100%;
-            height: 10%;
+            height: 8%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -83,8 +83,8 @@
             align-items: center;
             cursor: pointer;
             background: #372237;
-            font-size: 3svh;
-            aspect-ratio: 1/1.3;
+            font-size: 2.5svh;
+            aspect-ratio: 2.7/1;
         }
 
         #vocabulary {
@@ -114,9 +114,10 @@
         }
 
         #navTop>div:active,
+        #navModes>div:active,
         #navBottom>div:active,
         #buttonShowTranslation:active,
-        #reverseMode:active,
+        #buttonReverse:active,
         #buttonDownload:active {
             transform: scale(0.9);
         }
@@ -206,15 +207,8 @@
 
         #buttonDownload {
             display: none;
-            position: absolute;
-            right: 1%;
-            top: calc(80% - 7svh);
-            aspect-ratio: 1/1.3;
-            height: 7svh;
-            font-size: 2svh;
             justify-content: center;
             align-items: center;
-            background: transparent;
             box-shadow: inset 0 0 0 0.3svh var(--title-color);
         }
 
@@ -233,12 +227,42 @@
             transition: 1s;
             aspect-ratio: 1/1;
         }
+
+        #navModes {
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            backdrop-filter: blur(3px);
+            background: #130c13f5;
+            width: 97%;
+            height: 91%;
+            z-index: 1000;
+        }
+
+        .navVisible {
+            transform: translateY(0%) !important;
+        }
+
+        #navModes div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70%;
+            height: 7svh;
+            background: #372237;
+            margin: 1.4svh 0;
+        }
     </style>
 </head>
 
 <body>
     <div id="wrap">
-        <div id="navTop">
+        <div id="navModes">
             <div id="buttonMode1">1</div>
             <div id="buttonMode2">2</div>
             <div id="buttonMode3">3</div>
@@ -246,7 +270,11 @@
             <div id="buttonMode5">5</div>
             <div id="buttonMode6">6</div>
             <div id="buttonMode7">7</div>
-            <div id="reverseMode">+</div>
+        </div>
+        <div id="navTop">
+            <div id="buttonNav">1</div>
+            <div id="buttonDownload">DL</div>
+            <div id="buttonReverse">+</div>
         </div>
         <div id="buttonShowTranslation">
             <div id="div1"><span></span></div>
@@ -258,7 +286,6 @@
             <div id="buttonCountWord">0</div>
             <div id="buttonNextWord">OK</div>
         </div>
-        <div id="buttonDownload">DL</div>
         <div id="achievement40Words"></div>
     </div>
     <script>
@@ -781,6 +808,8 @@
         // Store references to the elements in variables
         const body = document.querySelector("body");
         const wrap = document.getElementById("wrap");
+        const buttonNav = document.getElementById("buttonNav");
+        const navModes = document.getElementById("navModes");
         const div1Wrap = document.getElementById("div1");
         const div3Wrap = document.getElementById("div3");
         const navTop = document.getElementById("navTop");
@@ -797,7 +826,7 @@
         const buttonMode5 = document.getElementById("buttonMode5");
         const buttonMode6 = document.getElementById("buttonMode6");
         const buttonMode7 = document.getElementById("buttonMode7");
-        const reverseMode = document.getElementById("reverseMode");
+        const buttonReverse = document.getElementById("buttonReverse");
         const buttonAddWord = document.getElementById("buttonAddWord");
         const buttonDownload = document.getElementById("buttonDownload");
         const buttonNextWord = document.getElementById("buttonNextWord");
@@ -930,6 +959,7 @@
             clearStyles();
             modeActiveColor(currentMode);
             divsLayout(currentMode);
+            buttonNav.innerHTML = currentMode;
         }
 
         // Show or hide divs
@@ -990,11 +1020,11 @@
             }
         }
 
-        reverseMode.addEventListener("click", function () {
+        buttonReverse.addEventListener("click", function () {
             if (![3, 4, 5, 6].includes(currentMode)) {
                 currentReverseMode = !currentReverseMode;
 
-                reverseMode.classList.toggle("reverseBG");
+                buttonReverse.classList.toggle("reverseBG");
                 shuffle(currentArray);
                 indexMini = 0;
                 indexOfCurrentWord = 0;
@@ -1063,6 +1093,7 @@
             button.addEventListener("click", () => {
                 const mode = index + 1;
                 switchMode(mode);
+                navModes.classList.toggle("navVisible");
             });
         });
 
@@ -1118,7 +1149,7 @@
             arrayMini.length = 0;
             currentArray.length > 0 ? buttonNextWord.innerHTML = currentArray.length : null;
             buttonCountWord.innerHTML = arrayMini.length;
-            reverseMode.classList.remove("reverseBG");
+            buttonReverse.classList.remove("reverseBG");
             hideThis(achievement40Words);
             hideThis(buttonDownload);
         }
@@ -1224,6 +1255,10 @@
 
         // Add a button to trigger the download       
         buttonDownload.addEventListener("click", downloadArrayMini);
+
+        buttonNav.addEventListener("click", function () {
+            navModes.classList.toggle("navVisible");
+        })
 
     </script>
 </body>
