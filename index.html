@@ -922,9 +922,9 @@
         function switchMode(mode) {
             currentMode = mode;
             currentReverseMode = false;
-            shuffleAllArrays();
             currentArray = modes[currentMode].array;
             indexOfCurrentWord = 0;
+            shuffle(currentArray);
             clearStyles();
             modeActiveColor(currentMode);
             divsLayout(currentMode);
@@ -973,7 +973,7 @@
                 div3.innerText = word[mode[2]];
             }
 
-            if (currentMode < 3) {
+            if (![3, 4, 5, 6].includes(currentMode)) {
                 divsLayoutReverse(currentReverseMode, word);
             }
         }
@@ -989,7 +989,7 @@
         }
 
         reverseMode.addEventListener("click", function () {
-            if (currentMode < 3) {
+            if (![3, 4, 5, 6].includes(currentMode)) {
                 currentReverseMode = !currentReverseMode;
 
                 reverseMode.classList.toggle("reverseBG");
