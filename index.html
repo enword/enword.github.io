@@ -814,6 +814,7 @@
         let arrayMini = [];
         let indexMini = 0;
         let indexOfCurrentWord = 0;
+        let arrayUnknown;
 
         fetch('new.html')
             .then(response => response.text())
@@ -823,14 +824,21 @@
                 const table = doc.querySelector('table');
                 const rows = table.querySelectorAll('tr');
 
-                const arrayUnknown = [];
+                arrayUnknown = [];
                 rows.forEach(row => {
                     const cells = row.querySelectorAll('td');
                     const rowData = Array.from(cells).map(cell => cell.textContent);
                     arrayUnknown.push(rowData);
                 });
-                return arrayUnknown;
+
+                document.dispatchEvent(new CustomEvent('dataReady', { detail: arrayUnknown }));
             });
+
+        // Anywhere in your script
+        document.addEventListener('dataReady', (event) => {
+            console.log('Data is now available:', event.detail);
+        });
+
         console.log(arrayUnknown);
 
         let modes = {
