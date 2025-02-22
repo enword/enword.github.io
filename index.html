@@ -817,7 +817,6 @@
         let indexMini = 0;
         let indexOfCurrentWord = 0;
         let arrayUnknown = [];
-        getArray();
 
         let modes = {
             1: {
@@ -1043,7 +1042,11 @@
             button.addEventListener("click", () => {
                 const mode = index + 1;
                 switchMode(mode);
-                console.log(arrayUnknown);
+
+                if (currentMode === 7) {
+                    getArray();
+                    console.log(arrayUnknown);
+                }
             });
         });
 
