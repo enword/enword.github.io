@@ -815,6 +815,24 @@
         let indexMini = 0;
         let indexOfCurrentWord = 0;
 
+        fetch('new.html')
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const table = doc.querySelector('table');
+                const rows = table.querySelectorAll('tr');
+
+                const arrayUnknown = [];
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    const rowData = Array.from(cells).map(cell => cell.textContent);
+                    arrayUnknown.push(rowData);
+                });
+                return arrayUnknown;
+            });
+        console.log(arrayUnknown);
+
         let modes = {
             1: {
                 wordOrder: [2, 0, 1],
@@ -1201,25 +1219,6 @@
         // Add a button to trigger the download       
         buttonDownload.addEventListener("click", downloadArrayMini);
 
-        //
-        //
-        fetch('new.html')
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const table = doc.querySelector('table');
-                const rows = table.querySelectorAll('tr');
-
-                arrayUnknown = [];
-                rows.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    const rowData = Array.from(cells).map(cell => cell.textContent);
-                    arrayUnknown.push(rowData);
-                });
-                return arrayUnknown;
-            });
-        console.log(arrayUnknown);
     </script>
 </body>
 
