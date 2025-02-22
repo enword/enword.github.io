@@ -811,6 +811,7 @@
         const achievement40Words = document.getElementById("achievement40Words");
         const buttonShowTranslation = document.getElementById("buttonShowTranslation");
 
+        let arrayUnknown = [];
         let arrayMini = [];
         let indexMini = 0;
         let indexOfCurrentWord = 0;
@@ -869,6 +870,15 @@
                 showBtn: [],
                 hideBtn: [buttonAddWord, buttonCountWord],
                 array: arrayLongWords,
+            },
+            7: {
+                wordOrder: [2, 0, 1],
+                showDiv: [div2, div3],
+                hideDiv: [div1],
+                translationDiv: [div1],
+                showBtn: [buttonAddWord, buttonCountWord],
+                hideBtn: [],
+                array: arrayUnknown,
             },
         };
 
@@ -1202,15 +1212,15 @@
                 const table = doc.querySelector('table');
                 const rows = table.querySelectorAll('tr');
 
-                const arrayUnknown = [];
+                arrayUnknown = [];
                 rows.forEach(row => {
                     const cells = row.querySelectorAll('td');
                     const rowData = Array.from(cells).map(cell => cell.textContent);
                     arrayUnknown.push(rowData);
                 });
-                console.log(arrayUnknown); // Output the array to the console         
+                return arrayUnknown;
             });
-
+        console.log(arrayUnknown);
     </script>
 </body>
 
