@@ -817,7 +817,7 @@
         let indexMini = 0;
         let indexOfCurrentWord = 0;
         let arrayUnknown = [];
-        getArray();
+        await getArray();
 
         let modes = {
             1: {
@@ -1225,7 +1225,7 @@
 
         // Function to wait for `arrayUnknown` and return it
         async function getArray() {
-            while (!arrayUnknown) {
+            while (arrayUnknown.length === 0) {
                 await new Promise(resolve => setTimeout(resolve, 50));
             }
             return arrayUnknown;
