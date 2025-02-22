@@ -10,12 +10,6 @@
     <link rel="icon" href="./favicon.svg" type="image/x-icon">
     <title>enWord</title>
     <style>
-        /* @font-face {
-            font-family: "Jost";
-            src: url("./font.ttf") format("truetype");
-            font-weight: 700;
-        } */
-
         :root {
             --title-color: #b6a2f9;
             --bg-color: linear-gradient(180deg, rgba(41, 29, 39, 1) 0%, rgba(32, 31, 36, 1) 100%);
@@ -820,6 +814,15 @@
         // Fetch words from new.html
         async function initializeArray() {
             const response = await fetch('new.html');
+
+            if (!response.ok) {
+                hideThis(buttonMode7);
+                console.log("new.html is missing");
+                return; // Stop further execution if the file is not found
+            } else {
+                showThis(buttonMode7);
+            }
+
             const html = await response.text();
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
