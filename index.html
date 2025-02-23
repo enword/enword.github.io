@@ -68,7 +68,7 @@
 
         #navTop {
             width: 100%;
-            height: 9%;
+            height: 7%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -89,7 +89,7 @@
 
         #navBottom {
             width: 100%;
-            height: 21%;
+            height: 18%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -130,7 +130,7 @@
         }
 
         #buttonShowTranslation {
-            height: 100%;
+            flex: 1;
             width: 94%;
             display: flex;
             flex-direction: column;
@@ -140,27 +140,27 @@
         }
 
         #div1 {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
             flex: 1;
-        }
-
-        #div2 {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex: 1;
         }
 
-        #div3 {
+        #div2 {
+            flex: 1;
             width: 100%;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
+        }
+
+        #div3 {
             flex: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #div1 span,
@@ -169,8 +169,8 @@
             font-size: 7svh;
             line-height: 1.2;
             overflow-wrap: anywhere;
+            flex: 1;
             width: 100%;
-            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -231,8 +231,8 @@
             align-items: center;
             flex-direction: column;
             transform: translateY(100%);
-            backdrop-filter: blur(4px);
-            background: #130c13e3;
+            backdrop-filter: blur(5px);
+            background: #1d181ebd;
             width: 98%;
             max-width: 400px;
             height: 90%;
@@ -258,15 +258,6 @@
 
 <body>
     <div id="wrap">
-        <div id="navModes">
-            <div id="buttonMode1">1 words</div>
-            <div id="buttonMode2">2 words</div>
-            <div id="buttonMode3">3 questions</div>
-            <div id="buttonMode4">4 phrases</div>
-            <div id="buttonMode5">5 verbs</div>
-            <div id="buttonMode6">6 text</div>
-            <div id="buttonMode7">7 repeat</div>
-        </div>
         <div id="navTop">
             <div id="buttonNav">1</div>
             <div id="buttonDownload">DL</div>
@@ -283,6 +274,15 @@
             <div id="buttonNextWord">OK</div>
         </div>
         <div id="achievement40Words"></div>
+        <div id="navModes">
+            <div id="buttonMode1">1 words</div>
+            <div id="buttonMode2">2 words</div>
+            <div id="buttonMode3">3 questions</div>
+            <div id="buttonMode4">4 phrases</div>
+            <div id="buttonMode5">5 verbs</div>
+            <div id="buttonMode6">6 text</div>
+            <div id="buttonMode7">7 repeat</div>
+        </div>
     </div>
     <script>
         // Arrays
