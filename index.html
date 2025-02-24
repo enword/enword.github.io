@@ -230,7 +230,7 @@
             align-content: center;
             gap: 3svh;
             transform: translateY(100%);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(7px);
             background: #1d181ebd;
             width: 70svh;
             height: 90svh;
@@ -1042,6 +1042,10 @@
             divsLayout(currentMode, true);
             /*buttonCountWord.innerHTML = arrayMini.length - indexMini;*/
         }
+        buttonNextWord.addEventListener("click", function () {
+            actionNextWord(currentMode);
+            achieve40Words();
+        });
 
         buttonCountWord.addEventListener("click", function () {
             if (arrayMini.length > 0) {
@@ -1066,8 +1070,17 @@
                 console.log(x);
             }
         }
+        buttonAddWord.addEventListener("click", function () {
+            actionAddWord(currentMode);
 
-        // Show Translation
+            // Download btn
+            if (arrayMini.length > 0) {
+                buttonDownload.style.display = "flex";
+            } else {
+            }
+        });
+
+        // Show translation
         function showTranslation(currentMode, currentReverseMode) {
             if (currentReverseMode === true) {
                 modesReverse[1].translationDiv.forEach(showThis);
@@ -1075,29 +1088,32 @@
                 modes[currentMode].translationDiv.forEach(showThis);
             }
         }
-
         buttonShowTranslation.addEventListener("click", function () {
             showTranslation(currentMode, currentReverseMode);
         });
 
-
-        // Switch mode
-        document.querySelectorAll("[id^=buttonMode]").forEach((button, index) => {
+        // buttonMode listener
+        const modeButtons = Array.from(document.querySelectorAll("[id^=buttonMode]"));
+        modeButtons.forEach((button, index) => {
             button.addEventListener("click", () => {
-                const mode = index + 1;
-                switchMode(mode);
+                switchMode(index + 1);
                 navModes.classList.toggle("navVisible");
             });
         });
 
+        // Active buttonMode color
+        function modeActiveColor(currentMode) {
+            buttonMode = document.getElementById(`buttonMode${currentMode}`);
+            buttonMode.style.background = "#553674";
+        }
+
+        // Text to speach
         function textToSpeach(currentMode, div) {
             if ("speechSynthesis" in window) {
                 const utterance = new SpeechSynthesisUtterance(div.textContent);
                 window.speechSynthesis.speak(utterance);
             }
         }
-
-        // Text to speach
         div1.addEventListener("click", function () {
             const div = div1;
             if (/[а-яА-ЯёЁ]/.test(div1.textContent)) {
@@ -1115,27 +1131,7 @@
             }
         });
 
-        buttonNextWord.addEventListener("click", function () {
-            actionNextWord(currentMode);
-            achieve40Words();
-        });
-
-        buttonAddWord.addEventListener("click", function () {
-            actionAddWord(currentMode);
-
-            // download btn
-            if (arrayMini.length > 0) {
-                buttonDownload.style.display = "flex";
-            } else {
-            }
-        });
-
-        // Active buttonMode color
-        function modeActiveColor(currentMode) {
-            buttonMode = document.getElementById(`buttonMode${currentMode}`);
-            buttonMode.style.background = "#553674";
-        }
-
+        // Clear styles
         function clearStyles() {
             div1.innerHTML = "";
             div2.innerHTML = "";
@@ -1158,13 +1154,13 @@
         }
 
         // Hide any element
-        function hideThis(me) {
-            me.style.display = "none";
+        function hideThis(x) {
+            x.style.display = "none";
         }
 
         // Show any element
-        function showThis(me) {
-            me.style.display = "";
+        function showThis(x) {
+            x.style.display = "";
         }
 
         function show40() {
