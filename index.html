@@ -1092,19 +1092,28 @@
             });
         });
 
-        function textToSpeach(currentMode) {
+        function textToSpeach(currentMode, div) {
             if ("speechSynthesis" in window) {
-                const utterance = new SpeechSynthesisUtterance(div2.textContent);
+                const utterance = new SpeechSynthesisUtterance(div.textContent);
                 window.speechSynthesis.speak(utterance);
             }
         }
 
         // Text to speach
+        div1.addEventListener("click", function () {
+            const div = div1;
+            if (/[а-яА-ЯёЁ]/.test(div1.textContent)) {
+                console.log("not english text");
+            } else {
+                textToSpeach(currentMode, div);
+            }
+        });
         div2.addEventListener("click", function () {
+            const div = div2;
             if (/[а-яА-ЯёЁ]/.test(div2.textContent)) {
                 console.log("not english text");
             } else {
-                textToSpeach(currentMode);
+                textToSpeach(currentMode, div);
             }
         });
 
