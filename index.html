@@ -226,15 +226,15 @@
         #navModes {
             position: fixed;
             bottom: 0;
-            display: flex;
+            display: grid;
+            grid-template-columns: 22svh 22svh;
             justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            align-content: center;
+            gap: 3svh;
             transform: translateY(100%);
             backdrop-filter: blur(5px);
             background: #1d181ebd;
-            width: 98%;
-            max-width: 400px;
+            width: 70svh;
             height: 90svh;
             z-index: 1000;
         }
@@ -247,11 +247,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 70%;
-            height: 7svh;
+            overflow: hidden;
+            aspect-ratio: 2/1;
+            font-size: 2.5svh;
             background: #372237;
-            margin: 1.4svh 0;
-            font-size: 4svh;
         }
     </style>
 </head>
