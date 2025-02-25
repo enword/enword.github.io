@@ -108,10 +108,7 @@
 
       #navTop > div:active,
       #navModes > div:active,
-      #navBottom > div:active {
-        opacity: 0.5;
-      }
-
+      #navBottom > div:active,
       #buttonShowTranslation > div:active {
         opacity: 0.5;
       }
@@ -197,15 +194,11 @@
       }
 
       #buttonDownload {
-        display: none;
-        justify-content: center;
-        align-items: center;
         background: transparent !important;
         box-shadow: inset 0 0 0 0.3svh var(--title-color);
       }
 
       #achievement40Words {
-        display: none;
         position: absolute;
         left: -10px;
         top: 8%;
@@ -238,6 +231,14 @@
 
       .navVisible {
         transform: translateY(0%) !important;
+      }
+
+      .visible {
+        display: flex !important;
+      }
+
+      .hidden {
+        display: none !important;
       }
 
       #navModes > div {
@@ -1069,9 +1070,9 @@
       const wrap = document.getElementById("wrap");
       const buttonNav = document.getElementById("buttonNav");
       const navModes = document.getElementById("navModes");
+      const navTop = document.getElementById("navTop");
       const div1Wrap = document.getElementById("div1");
       const div3Wrap = document.getElementById("div3");
-      const navTop = document.getElementById("navTop");
       const div1 = document.querySelector("#div1 span");
       const div2 = document.querySelector("#div2 span");
       const div3 = document.querySelector("#div3 span");
@@ -1253,7 +1254,6 @@
         modes[currentMode].showBtn.forEach(showThis);
         modes[currentMode].hideBtn.forEach(hideThis);
 
-        console.log("small font: " + modes[currentMode].smallFont);
         div1.classList.toggle("small-font", modes[currentMode].smallFont);
         div2.classList.toggle("small-font", modes[currentMode].smallFont);
 
@@ -1354,16 +1354,15 @@
           arrayMini.push(word);
         }
         buttonCountWord.innerHTML = arrayMini.length;
-        for (x of arrayMini) {
-          console.log(x);
-        }
       }
       buttonAddWord.addEventListener("click", function () {
         actionAddWord(currentMode);
-
+        for (a of arrayMini) {
+          console.log(a);
+        }
         // Show button to download mini array
         if (arrayMini.length > 0) {
-          buttonDownload.style.display = "flex";
+          showThis(buttonDownload);
         }
       });
 
@@ -1423,16 +1422,14 @@
 
       // Hide any element
       function hideThis(el) {
-        el.style.display = "none";
+        el.classList.add("hidden");
+        el.classList.remove("visible");
       }
 
       // Show any element
       function showThis(el) {
-        el.style.display = "";
-      }
-
-      function show40() {
-        achievement40Words.style.display = "flex";
+        el.classList.add("visible");
+        el.classList.remove("hidden");
       }
 
       // every 40 words achievement is shown
@@ -1442,7 +1439,7 @@
 
         wordsCount.forEach((val, i) => {
           if (indexOfCurrentWord === wordsCount[i]) {
-            show40();
+            showThis(achievement40Words);
             achievement40Words.style.background = bgColors[i];
             achievement40Words.innerHTML = indexOfCurrentWord;
           }
