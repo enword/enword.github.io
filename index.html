@@ -278,7 +278,8 @@
             <div id="buttonMode4">4 phrase</div>
             <div id="buttonMode5">5 verbs</div>
             <div id="buttonMode6">6 text</div>
-            <div id="buttonMode7">7 repeat</div>
+            <div id="buttonMode7">7 CELPIP</div>
+            <div id="buttonMode8">8 CELPIP txt</div>
         </div>
     </div>
     <script>
@@ -532,6 +533,153 @@
             ["predominantly", "придОминэнтли", "преимущественно"],
             ["distinct", "дистИнкт", "различный"],
         ];
+
+        const arrayCelpipWords = [
+            ["accommodations", "empty", "жилье"],
+            ["accomplishment", "empty", "достижение"],
+            ["acquaintance", "empty", "знакомство"],
+            ["activist", "empty", "активист"],
+            ["acute", "empty", "острый"],
+            ["ambition", "empty", "амбиция"],
+            ["analyze", "empty", "анализировать"],
+            ["antibiotics", "empty", "антибиотики"],
+            ["anxious", "empty", "тревожный"],
+            ["diagonal", "empty", "диагональ"],
+            ["diamond", "empty", "бриллиант"],
+            ["indifferent", "empty", "равнодушный"],
+            ["pollution", "empty", "загрязнение"],
+            ["potential", "empty", "потенциал"],
+            ["discipline", "empty", "дисциплина"],
+            ["industry", "empty", "промышленность"],
+            ["infection", "empty", "инфекция"],
+            ["distant", "empty", "далекий"],
+            ["infer", "empty", "делать вывод"],
+            ["divorce", "empty", "развод"],
+            ["earnings", "empty", "заработок"],
+            ["economy", "empty", "экономика"],
+            ["ecosystem", "empty", "экосистема"],
+            ["ecstatic", "empty", "в восторге"],
+            ["education", "empty", "образование"],
+            ["inflation", "empty", "инфляция"],
+            ["insomnia", "empty", "бессонница"],
+            ["interpret", "empty", "интерпретировать"],
+            ["invention", "empty", "изобретение"],
+            ["poverty", "empty", "бедность"],
+            ["practical", "empty", "практичный"],
+            ["predict", "empty", "предсказывать"],
+            ["professional", "empty", "профессиональный"],
+            ["promotion", "empty", "продвижение"],
+            ["prompt", "empty", "быстрый"],
+            ["public", "empty", "общественный"],
+            ["pulse", "empty", "пульс"],
+            ["qualified", "empty", "квалифицированный"],
+            ["arrogant", "empty", "высокомерный"],
+            ["effect", "empty", "эффект"],
+            ["rectangle", "empty", "прямоугольник"],
+            ["assess", "empty", "оценивать"],
+            ["elaborate", "илАбэрэт", "разработать"],
+            ["relatives", "рЭлэтивс", "родственники"],
+            ["elections", "илЭкшэнс", "выборы"],
+            ["jealous", "джЭлас", "ревнивый"],
+            ["audio", "Одио", "аудио"],
+            ["journey", "empty", "путешествие"],
+            ["backspace", "empty", "возврат"],
+            ["employee", "empty", "сотрудник"],
+            ["keyboard", "empty", "клавиатура"],
+            ["bacteria", "empty", "бактерии"],
+            ["landlord", "empty", "арендодатель"],
+            ["layover", "empty", "пересадка"],
+            ["left-click", "empty", "левый клик"],
+            ["liberal", "empty", "либеральный"],
+            ["lonely", "empty", "одинокий"],
+            ["malfunction", "empty", "неисправность"],
+            ["distant", "empty", "далекий"],
+            ["infer", "empty", "делать вывод"],
+            ["medical", "empty", "медицинский"],
+            ["mentor", "empty", "наставник"],
+            ["miserly", "empty", "скупой"],
+            ["monitor", "empty", "монитор"],
+            ["moustache", "empty", "усы"],
+            ["muscle", "empty", "мышца"],
+            ["muscular", "empty", "мускулистый"],
+            ["nauseating", "empty", "тошнотворный"],
+            ["neighbour", "empty", "сосед"],
+            ["mechanism", "empty", "механизм"],
+            ["metabolism", "empty", "метаболизм"],
+            ["motorboat", "empty", "моторная лодка"],
+            ["mouse", "empty", "мышь"],
+            ["nutrients", "empty", "питательные вещества"],
+            ["objective", "empty", "объективный"],
+            ["obstacle", "empty", "препятствие"],
+            ["optimistic", "empty", "оптимистичный"],
+            ["organism", "empty", "организм"],
+            ["outgoing", "empty", "общительный"],
+            ["outline", "empty", "контур"],
+            ["overweight", "empty", "избыточный вес"],
+            ["partner", "empty", "партнер"],
+            ["passengers", "empty", "пассажиры"],
+            ["persuade", "empty", "убеждать"],
+            ["pessimistic", "empty", "пессимистичный"],
+            ["pimples", "empty", "прыщи"],
+            ["plaid", "empty", "клетчатый"],
+            ["plain", "empty", "простой"],
+            ["polka-dot", "empty", "в горошек"],
+            ["reserve", "empty", "резервировать"],
+            ["resort", "empty", "курорт"],
+            ["resources", "empty", "ресурсы"],
+            ["response", "empty", "ответ"],
+            ["right-click", "empty", "правый клик"],
+            ["schedule", "empty", "расписание"],
+            ["scroll wheel", "empty", "колесо прокрутки"],
+            ["scruffy", "empty", "неопрятный"],
+            ["shift", "empty", "сдвиг"],
+            ["square", "empty", "квадрат"],
+            ["star", "empty", "звезда"],
+            ["stocky", "empty", "коренастый"],
+            ["strained", "empty", "напряженный"],
+            ["striped", "empty", "полосатый"],
+            ["subjective", "empty", "субъективный"],
+            ["substance", "empty", "вещество"],
+            ["summarize", "empty", "резюмировать"],
+            ["summit", "empty", "вершина"],
+            ["supervisor", "empty", "руководитель"],
+            ["surprised", "empty", "удивленный"],
+            ["sympathetic", "empty", "сочувствующий"],
+            ["synthetic", "empty", "синтетический"],
+            ["tab", "empty", "вкладка"],
+            ["tanned", "empty", "загорелый"],
+            ["tattoos", "empty", "татуировки"],
+            ["tenant", "empty", "арендатор"],
+            ["theory", "empty", "теория"],
+            ["thermometer", "empty", "термометр"],
+            ["toxic", "empty", "токсичный"],
+            ["triangle", "empty", "треугольник"],
+            ["unbalanced", "empty", "несбалансированный"],
+            ["underweight", "empty", "недостаточный вес"],
+            ["variable", "empty", "переменная"],
+            ["vertical", "empty", "вертикальный"],
+            ["withdrawn", "empty", "замкнутый"],
+            ["wrinkles", "empty", "морщины"],
+            ["zigzag", "empty", "зигзаг"]
+        ];
+
+        const arrayCelpipTexts = [
+            ["When students do not know the definition of a word, they can infer the meaning from the context of the Sentence.", "empty"],
+            ["Sammy did not understand the results from his lab experiment, so his partner interpreted the meaning of the results to him.", "empty"],
+            ["After reviewing his class notes, Mohammed predicted some questions that he thought would be on the exam.", "empty"],
+            ["Miss Atkins liked the class's idea about having a party on their last day of school and asked her students to elaborate on the details of the event.", "empty"],
+            ["Mina outlined the most important points that would be on the test.", "empty"],
+            ["Thiago compared his last Listening Test results with his current ones and realized that he had Improved.", "empty"],
+            ["Mariam learned the contrast between 'p' and 'b' sounds, as in 'pack' and 'back,' in her English class.", "empty"]
+            ["At first Camila's parents were reluctant to let her join an afterschool English class, but she was able to persuade them eventually.", "empty"],
+            ["The teacher demonstrated to her English class a way to change a statement into a question.", "empty"],
+            ["Ben generalized that taking notes in class would help all students improve their grade because it helped him.", "empty"],
+            ["Marc assesses his students' performance based on their class participation and test scores.", "empty"],
+            ["Emma forgot to do her reading homework so she asked her classmate to summarize the reading for her before class started.", "empty"],
+            ["Edward was feeling sleepy in class so he did not hear most of the lesson, but he got the gist of what the teacher said.", "empty"],
+            ["Althea asked her class a question, but there was no response. The class was shy.", "empty"],
+            ["Daniel could not understand anything his classmate, Shirley, was telling him because there was no coherence in the things she said.", "empty"]
+        ]
 
         const arrayVerbWords = [
             ["awake", "awoke", "awoken", "проснуться"],
@@ -821,6 +969,7 @@
         const buttonMode5 = document.getElementById("buttonMode5");
         const buttonMode6 = document.getElementById("buttonMode6");
         const buttonMode7 = document.getElementById("buttonMode7");
+        const buttonMode8 = document.getElementById("buttonMode8");
         const buttonReverse = document.getElementById("buttonReverse");
         const buttonAddWord = document.getElementById("buttonAddWord");
         const buttonDownload = document.getElementById("buttonDownload");
@@ -835,16 +984,8 @@
         let arrayUnknown = [];
 
         // Fetch words from new.html
-        async function initializeArray() {
+        /* async function initializeArray() {
             const response = await fetch('new.html');
-
-            if (!response.ok) {
-                hideThis(buttonMode7);
-                console.log("new.html is missing");
-                return; // Stop further execution if the file is not found
-            } else {
-                showThis(buttonMode7);
-            }
 
             const html = await response.text();
             const parser = new DOMParser();
@@ -863,7 +1004,7 @@
             console.log("Data fetched:", arrayUnknown);
             // Now update your modes object here, once arrayUnknown has been populated.
             modes[7].array = arrayUnknown;
-        });
+        }); */
 
         let modes = {
             1: {
@@ -927,7 +1068,16 @@
                 translationDiv: [div1],
                 showBtn: [buttonAddWord, buttonCountWord],
                 hideBtn: [],
-                array: arrayUnknown,
+                array: arrayCelpipWords,
+            },
+            8: {
+                wordOrder: [3, 0, 1],
+                showDiv: [div2],
+                hideDiv: [div1, div3],
+                translationDiv: [],
+                showBtn: [],
+                hideBtn: [buttonAddWord, buttonCountWord],
+                array: arrayCelpipTexts,
             },
         };
 
@@ -962,15 +1112,11 @@
             modes[currentMode].showBtn.forEach(showThis);
             modes[currentMode].hideBtn.forEach(hideThis);
 
-            if (currentMode === 4) {
+            if ([6, 8].includes(parseInt(currentMode))) {
                 div1.classList.add("small-font");
-            } else {
-                div1.classList.remove("small-font");
-            }
-
-            if (currentMode === 6) {
                 div2.classList.add("small-font");
             } else {
+                div1.classList.remove("small-font");
                 div2.classList.remove("small-font");
             }
 
@@ -1034,6 +1180,10 @@
             divsLayout(currentMode);
             buttonNextWord.innerHTML = currentArray.length - indexOfCurrentWord;
         }
+        buttonNextWord.addEventListener("click", function () {
+            actionNextWord(currentMode);
+            achieve40Words();
+        });
 
         // Show next word in mini array
         function actionNextWordMini(currentMode) {
@@ -1042,11 +1192,6 @@
             divsLayout(currentMode, true);
             /*buttonCountWord.innerHTML = arrayMini.length - indexMini;*/
         }
-        buttonNextWord.addEventListener("click", function () {
-            actionNextWord(currentMode);
-            achieve40Words();
-        });
-
         buttonCountWord.addEventListener("click", function () {
             if (arrayMini.length > 0) {
                 actionNextWordMini(currentMode);
@@ -1136,13 +1281,7 @@
             div1.innerHTML = "";
             div2.innerHTML = "";
             div3.innerHTML = "";
-            buttonMode1.style.background = "";
-            buttonMode2.style.background = "";
-            buttonMode3.style.background = "";
-            buttonMode4.style.background = "";
-            buttonMode5.style.background = "";
-            buttonMode6.style.background = "";
-            buttonMode7.style.background = "";
+            [...document.querySelectorAll('[id^="buttonMode"]')].forEach(el => el.style.background = "");
             buttonNav.innerHTML = currentMode;
             indexMini = 0;
             arrayMini.length = 0;
