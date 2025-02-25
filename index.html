@@ -731,7 +731,7 @@
       const arrayCelpipTexts = [
         ["When students do not know the definition of a word, they can infer the meaning from the context of the Sentence.", "empty"],
         ["Sammy did not understand the results from his lab experiment, so his partner interpreted the meaning of the results to him.", "empty"],
-        ["After reviewing his class notes, Mohammed predicted some questions that he thought would be on the exam.", "empty"],
+        ["After reviewing his class notes, John predicted some questions that he thought would be on the exam.", "empty"],
         ["Miss Atkins liked the class's idea about having a party on their last day of school and asked her students to elaborate on the details of the event.", "empty"],
         ["Mina outlined the most important points that would be on the test.", "empty"],
         ["Thiago compared his last Listening Test results with his current ones and realized that he had Improved.", "empty"],
@@ -1104,6 +1104,9 @@
           showBtn: [buttonAddWord, buttonCountWord],
           hideBtn: [],
           array: arrayAllWords,
+          smallFont: false,
+          reverseAllowed: true,
+          ttsAllowed: true,
         },
         2: {
           wordOrder: [2, 0, 1],
@@ -1113,6 +1116,9 @@
           showBtn: [buttonAddWord, buttonCountWord],
           hideBtn: [],
           array: arrayLvl2Words,
+          smallFont: false,
+          reverseAllowed: true,
+          ttsAllowed: true,
         },
         3: {
           wordOrder: [2, 0, 1],
@@ -1122,6 +1128,9 @@
           showBtn: [],
           hideBtn: [buttonAddWord, buttonCountWord],
           array: arrayQuestionWords,
+          smallFont: false,
+          reverseAllowed: false,
+          ttsAllowed: true,
         },
         4: {
           wordOrder: [1, 0],
@@ -1131,6 +1140,9 @@
           showBtn: [],
           hideBtn: [buttonAddWord, buttonCountWord],
           array: arrayPhrases,
+          smallFont: false,
+          reverseAllowed: false,
+          ttsAllowed: true,
         },
         5: {
           wordOrder: [3, 0, 1],
@@ -1140,6 +1152,9 @@
           showBtn: [],
           hideBtn: [buttonAddWord, buttonCountWord],
           array: arrayVerbWords,
+          smallFont: false,
+          reverseAllowed: false,
+          ttsAllowed: true,
         },
         6: {
           wordOrder: [3, 0, 1],
@@ -1149,6 +1164,9 @@
           showBtn: [],
           hideBtn: [buttonAddWord, buttonCountWord],
           array: arrayLongWords,
+          smallFont: true,
+          reverseAllowed: false,
+          ttsAllowed: false,
         },
         7: {
           wordOrder: [2, 0, 1],
@@ -1158,6 +1176,9 @@
           showBtn: [buttonAddWord, buttonCountWord],
           hideBtn: [],
           array: arrayCelpipWords,
+          smallFont: false,
+          reverseAllowed: true,
+          ttsAllowed: true,
         },
         8: {
           wordOrder: [3, 0, 1],
@@ -1167,6 +1188,9 @@
           showBtn: [],
           hideBtn: [buttonAddWord, buttonCountWord],
           array: arrayCelpipTexts,
+          smallFont: true,
+          reverseAllowed: false,
+          ttsAllowed: false,
         },
       };
 
@@ -1209,14 +1233,14 @@
         modes[currentMode].showBtn.forEach(showThis);
         modes[currentMode].hideBtn.forEach(hideThis);
 
-        if ([6, 8].includes(parseInt(currentMode))) {
-          div1.classList.add("small-font");
-          div2.classList.add("small-font");
+        console.log("small font: " + modes[currentMode].smallFont);
+        div1.classList.toggle("small-font", modes[currentMode].smallFont);
+        div2.classList.toggle("small-font", modes[currentMode].smallFont);
+
+        if (modes[currentMode].smallFont) {
           hideThis(div1Wrap);
           hideThis(div3Wrap);
         } else {
-          div1.classList.remove("small-font");
-          div2.classList.remove("small-font");
           showThis(div1Wrap);
           showThis(div3Wrap);
         }
@@ -1245,7 +1269,7 @@
           div3.innerText = word[mode[2]];
         }
 
-        if (![3, 4, 5, 6].includes(currentMode)) {
+        if (modes[currentMode].reverseAllowed) {
           divsLayoutReverse(currentReverseMode, word);
         }
       }
@@ -1261,7 +1285,7 @@
       }
 
       buttonReverse.addEventListener("click", function () {
-        if (![3, 4, 5, 6].includes(currentMode)) {
+        if (modes[currentMode].reverseAllowed) {
           currentReverseMode = !currentReverseMode;
 
           buttonReverse.classList.toggle("reverseBG");
@@ -1443,7 +1467,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>enWord</title>
             <style>
-            body {            
+            body {
                 font-family: sans-serif;
                 font-weight: 900;
                 color: #ffffff;
@@ -1457,7 +1481,7 @@
                 border: 2px solid #553674;
                 padding: 8px;
                 text-align: center;
-            }      
+            }
             </style>
             </head>
             <body>
