@@ -1091,12 +1091,12 @@
       const buttonCountWord = document.getElementById("buttonCountWord");
       const achievement40Words = document.getElementById("achievement40Words");
       const buttonShowTranslation = document.getElementById("buttonShowTranslation");
+      const modeButtons = Array.from(document.querySelectorAll("[id^=buttonMode]")); // Array with all mode buttons
 
       let arrayMini = [];
       let indexMini = 0;
       let indexOfCurrentWord = 0;
       let arrayUnknown = [];
-      const modeButtons = Array.from(document.querySelectorAll("[id^=buttonMode]")); // Array with all mode buttons
 
       // Fetch words from new.html
       /* async function initializeArray() {
