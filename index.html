@@ -165,7 +165,7 @@
       #div2 span,
       #div3 span {
         height: 100%;
-        font-size: 5.9svh;
+        font-size: 7svh;
         line-height: 1.2;
         overflow-wrap: anywhere;
         width: 100%;
@@ -184,14 +184,6 @@
 
       #div3 span {
         color: #ffffff80;
-      }
-
-      .small-font {
-        font-size: 5svh !important;
-      }
-
-      .reverseBG {
-        background: #ff5400 !important;
       }
 
       #buttonDownload {
@@ -230,6 +222,24 @@
         z-index: 1000;
       }
 
+      #navModes > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-wrap: break-word;
+        aspect-ratio: 2/1;
+        font-size: 3svh;
+        background: #372237;
+      }
+
+      .small-font {
+        font-size: 5svh !important;
+      }
+
+      .reverseBG {
+        background: #ff5400 !important;
+      }
+
       .navVisible {
         transform: translateY(0%) !important;
       }
@@ -244,16 +254,6 @@
 
       .textLeft {
         text-align: left !important;
-      }
-
-      #navModes > div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow-wrap: break-word;
-        aspect-ratio: 2/1;
-        font-size: 3svh;
-        background: #372237;
       }
     </style>
   </head>
@@ -1166,7 +1166,7 @@
           showBtn: [],
           hideBtn: [buttonAddWord, buttonCountWord],
           array: arrayPhrases,
-          smallFont: false,
+          smallFont: true,
           reverseAllowed: false,
           ttsAllowed: true,
         },
@@ -1242,12 +1242,6 @@
         clearStyles();
         modeActiveColor(currentMode);
         divsLayout(currentMode);
-
-        if ([6, 8].includes(currentMode)) {
-          div2.classList.add("textLeft");
-        } else {
-          div2.classList.remove("textLeft");
-        }
       }
 
       // buttonMode listener
@@ -1267,13 +1261,12 @@
 
         div1.classList.toggle("small-font", modes[currentMode].smallFont);
         div2.classList.toggle("small-font", modes[currentMode].smallFont);
+        div3.classList.toggle("small-font", modes[currentMode].smallFont);
 
-        if (modes[currentMode].smallFont) {
-          hideThis(div1Wrap);
-          hideThis(div3Wrap);
+        if ([6, 8].includes(currentMode)) {
+          div2.classList.add("textLeft");
         } else {
-          showThis(div1Wrap);
-          showThis(div3Wrap);
+          div2.classList.remove("textLeft");
         }
 
         wordsLayout(currentMode, isMini);
