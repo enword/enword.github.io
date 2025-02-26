@@ -1409,10 +1409,16 @@
         if ("speechSynthesis" in window) {
           const utterance = new SpeechSynthesisUtterance(div.textContent);
           if (modes[currentMode].ttsAllowed) {
-            console.log("last: " + ttsVoices[0].lang);
-            utterance.voice = ttsVoices.find((voice) => voice.lang === "en_US");
-            console.log("ololo: " + utterance.voice);
-            window.speechSynthesis.speak(utterance);
+            // Universal approach to find the en-US voice, handling both "en_US" and "en-US" formats
+            const enUSVoice = ttsVoices.find((voice) => voice.lang.replace("_", "-") === "en-US");
+
+            if (enUSVoice) {
+              utterance.voice = enUSVoice;
+              console.log(enUSVoice);
+              window.speechSynthesis.speak(utterance);
+            } else {
+              console.warn("English US voice not found.");
+            }
           }
         }
       }
