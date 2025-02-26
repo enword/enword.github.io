@@ -1394,7 +1394,9 @@
         if ("speechSynthesis" in window) {
           const utterance = new SpeechSynthesisUtterance(div.textContent);
           if (modes[currentMode].ttsAllowed) {
+            utterance.voice = window.speechSynthesis.getVoices().find((voice) => voice.name === "English United States"); // Add this line here
             window.speechSynthesis.speak(utterance);
+            console.log(utterance.voice);
           }
         }
       }
