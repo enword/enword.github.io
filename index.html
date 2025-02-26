@@ -288,6 +288,27 @@
       </div>
     </div>
     <script>
+      window.speechSynthesis.getVoices(); // Preload TTS voices
+      let ttsVoices;
+      function populateVoices() {
+        const v = window.speechSynthesis.getVoices();
+        if (v.length > 0) {
+          ttsVoices = v;
+          console.log("Voices populated:", ttsVoices);
+          // You can now use ttsVoices
+          window.speechSynthesis.removeEventListener("voiceschanged", populateVoices); //remove the event listener after it is no longer needed.
+        }
+      }
+
+      // Check if voices are already available (in some cases, they might be)
+      if (window.speechSynthesis.getVoices().length > 0) {
+        ttsVoices = window.speechSynthesis.getVoices();
+        console.log("Voices already available:", ttsVoices);
+      } else {
+        // Listen for the voiceschanged event
+        window.speechSynthesis.addEventListener("voiceschanged", populateVoices);
+      }
+
       // Arrays
       const arrayAllWordsOrig = [
         ["be", "би", "быть"],
@@ -1068,12 +1089,6 @@
         }
       }
 
-      window.speechSynthesis.getVoices(); // Preload TTS voices
-
-      setTimeout(() => {
-        console.log(window.speechSynthesis.getVoices());
-      }, 3000);
-
       // Store references to the elements in variables
       const body = document.querySelector("body");
       const wrap = document.getElementById("wrap");
@@ -1394,9 +1409,10 @@
         if ("speechSynthesis" in window) {
           const utterance = new SpeechSynthesisUtterance(div.textContent);
           if (modes[currentMode].ttsAllowed) {
-            utterance.voice = window.speechSynthesis.getVoices().find((voice) => voice.lang === "de_DE"); // Add this line here
+            console.log("last: " + ttsVoices[0].lang);
+            utterance.voice = ttsVoices.find((voice) => voice.lang === "en_US");
+            console.log("ololo: " + utterance.voice);
             window.speechSynthesis.speak(utterance);
-            console.log(utterance.voice);
           }
         }
       }
