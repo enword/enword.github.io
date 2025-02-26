@@ -58,7 +58,7 @@
 
       #wrap {
         width: 97%;
-        max-width: 700px;
+        max-width: 500px;
         height: 97%;
         display: flex;
         justify-content: center;
@@ -1070,6 +1070,10 @@
 
       window.speechSynthesis.getVoices(); // Preload TTS voices
 
+      setTimeout(() => {
+        console.log(window.speechSynthesis.getVoices());
+      }, 3000);
+
       // Store references to the elements in variables
       const body = document.querySelector("body");
       const wrap = document.getElementById("wrap");
@@ -1303,15 +1307,12 @@
           modesReverse[1].showDiv.forEach(showThis);
           modesReverse[1].hideDiv.forEach(hideThis);
           [div1.innerText, div2.innerText, div3.innerText] = modesReverse[1].wordOrder.map((i) => word[i]);
-        } else {
-          // do nothing
         }
       }
 
       buttonReverse.addEventListener("click", function () {
         if (modes[currentMode].reverseAllowed) {
           currentReverseMode = !currentReverseMode; // mode toggle
-
           buttonReverse.classList.toggle("reverseBG");
           shuffle(currentArray);
           indexMini = 0;
@@ -1397,6 +1398,7 @@
           }
         }
       }
+
       function checkifEnglish(event) {
         const div = event.target;
         if (/[а-яА-ЯёЁ]/.test(div.textContent)) {
